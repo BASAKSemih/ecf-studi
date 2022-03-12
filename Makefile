@@ -45,3 +45,7 @@ analyse:
 	make phpmd
 	make insights
 	make phpstan
+
+test:
+	composer prepare-test
+	vendor/bin/phpunit
