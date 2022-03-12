@@ -11,3 +11,9 @@ insights:
 
 phpstan:
 	php vendor/bin/phpstan analyse -c phpstan.neon src --no-progress
+
+fix:
+	vendor/bin/php-cs-fixer fix
+
+metrics:
+	php ./vendor/bin/phpmetrics --report-html=myreport ./src
