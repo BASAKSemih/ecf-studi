@@ -43,10 +43,11 @@ class Manager implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToOne(mappedBy: 'manager', targetEntity: Hotel::class, cascade: ['persist', 'remove'])]
     private ?Hotel $hotel;
 
-    #[Pure] public function __toString(): string
-    {
-        return $this->getLastName() . ' ' . $this->getFirstName();
-    }
+    #[Pure]
+ public function __toString(): string
+ {
+     return $this->getLastName().' '.$this->getFirstName();
+ }
 
     public function __construct()
     {

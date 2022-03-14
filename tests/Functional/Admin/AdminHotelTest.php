@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Tests\Functional\Admin;
 
 use App\Controller\Admin\HotelCrudController;
-use App\Controller\Admin\ManagerCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -32,20 +31,18 @@ final class AdminHotelTest extends WebTestCase
 
         /** @var AdminUrlGenerator $urlGenerator */
         $adminUrlGenerator = $client->getContainer()->get(AdminUrlGenerator::class);
-        $client->request('GET', (string)$adminUrlGenerator->setController(HotelCrudController::class)->setAction(Action::NEW)->generateUrl());
+        $client->request('GET', (string) $adminUrlGenerator->setController(HotelCrudController::class)->setAction(Action::NEW)->generateUrl());
         self::assertResponseIsSuccessful();
         self::assertRouteSame('security_admin_homePage');
 
-        $client->submitForm("Create", [
+        $client->submitForm('Create', [
             'Hotel[name]' => 'Best Hotel',
             'Hotel[description]' => 'A hotel with spa',
             'Hotel[address]' => 'see in google map',
             'Hotel[city]' => 'cityhotel',
-            'Hotel[manager]' => 1
+            'Hotel[manager]' => 1,
         ]);
         $client->submit($form);
         self::assertResponseStatusCodeSame(Response::HTTP_FOUND);
-
     }
-
 }

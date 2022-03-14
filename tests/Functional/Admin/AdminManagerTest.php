@@ -31,11 +31,11 @@ final class AdminManagerTest extends WebTestCase
 
         /** @var AdminUrlGenerator $urlGenerator */
         $adminUrlGenerator = $client->getContainer()->get(AdminUrlGenerator::class);
-        $client->request('GET', (string)$adminUrlGenerator->setController(ManagerCrudController::class)->setAction(Action::NEW)->generateUrl());
+        $client->request('GET', (string) $adminUrlGenerator->setController(ManagerCrudController::class)->setAction(Action::NEW)->generateUrl());
         self::assertResponseIsSuccessful();
         self::assertRouteSame('security_admin_homePage');
 
-        $client->submitForm("Create", [
+        $client->submitForm('Create', [
             'Manager[lastName]' => 'Fréderic',
             'Manager[firstName]' => 'Joe',
             'Manager[email]' => 'fred@joe.com',
@@ -43,7 +43,5 @@ final class AdminManagerTest extends WebTestCase
         ]);
         $client->submit($form);
         self::assertResponseStatusCodeSame(Response::HTTP_FOUND);
-
     }
-
 }

@@ -6,7 +6,6 @@ use App\Entity\Hotel;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class HotelCrudController extends AbstractCrudController
@@ -16,7 +15,6 @@ class HotelCrudController extends AbstractCrudController
         return Hotel::class;
     }
 
-
     public function configureFields(string $pageName): iterable
     {
         return [
@@ -24,8 +22,7 @@ class HotelCrudController extends AbstractCrudController
             TextareaField::new('description'),
             TextareaField::new('address'),
             TextField::new('city'),
-            AssociationField::new('manager')
+            AssociationField::new('manager'),
         ];
     }
-
 }
