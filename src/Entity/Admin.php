@@ -25,7 +25,7 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
      * @var array<array-key, string>
      */
     #[ORM\Column(type: 'json')]
-    private array $roles = ['ADMINISTRATOR'];
+    private array $roles = ['ROLE_ADMINISTRATOR'];
 
     #[ORM\Column(type: 'string')]
     private string $password;
@@ -85,7 +85,6 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        $roles[] = 'ADMINISTRATOR';
 
         return array_unique($roles);
     }
