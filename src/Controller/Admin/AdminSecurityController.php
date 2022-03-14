@@ -18,7 +18,7 @@ final class AdminSecurityController extends AbstractController
         if ($this->getUser()) {
             $this->addFlash('warning', 'Vous êtes déjà connecter');
 
-            return $this->redirectToRoute('homePage');//TODO Redirecto to admin crud
+            return $this->redirectToRoute('homePage'); //TODO Redirecto to admin crud
         }
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
@@ -29,6 +29,5 @@ final class AdminSecurityController extends AbstractController
     #[Route(path: '/espace-administrateur/deconnexion', name: 'logout')]
     public function logout(): void
     {
-        $this->addFlash('success', 'Vous avez été déconnecter');
     }
 }

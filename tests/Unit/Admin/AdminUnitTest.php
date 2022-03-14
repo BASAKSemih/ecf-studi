@@ -19,19 +19,18 @@ final class AdminUnitTest extends TestCase
             ->setLastName('Doe')
             ->setEmail('john@doe.com')
             ->setPassword('password')
-            ->setRoles(array('ADMIN'))
+            ->setRoles(['ADMIN'])
             ->setCreatedAt($dateTime);
 
-        $this->assertSame($admin->getFirstName(),  'John');
-        $this->assertSame($admin->getLastName(),  'Doe');
-        $this->assertSame($admin->getEmail(),  'john@doe.com');
-        $this->assertSame($admin->getPassword(),  'password');
-        $this->assertSame($admin->getCreatedAt(),  $dateTime);
-        $this->assertSame($admin->getUsername(),  'john@doe.com');
-        $this->assertSame($admin->getUserIdentifier(),  'john@doe.com');
-        $this->assertSame($admin->getRoles(), ["ADMIN"]);
+        $this->assertSame($admin->getFirstName(), 'John');
+        $this->assertSame($admin->getLastName(), 'Doe');
+        $this->assertSame($admin->getEmail(), 'john@doe.com');
+        $this->assertSame($admin->getPassword(), 'password');
+        $this->assertSame($admin->getCreatedAt(), $dateTime);
+        $this->assertSame($admin->getUsername(), 'john@doe.com');
+        $this->assertSame($admin->getUserIdentifier(), 'john@doe.com');
+        $this->assertSame($admin->getRoles(), ['ADMIN']);
         $this->assertNull($admin->getSalt());
         $this->assertNull($admin->getId());
     }
-
 }
