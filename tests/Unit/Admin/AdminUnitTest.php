@@ -32,8 +32,6 @@ final class AdminUnitTest extends TestCase
         $this->assertSame($admin->getRoles(), ["ADMIN"]);
         $this->assertNull($admin->getSalt());
         $this->assertNull($admin->getId());
-
-
     }
 
 }
