@@ -38,5 +38,4 @@ class HotelFixtures extends Fixture
         $objectManager->persist($hotel);
         $objectManager->flush();
     }
-
 }

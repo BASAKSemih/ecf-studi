@@ -24,5 +24,4 @@ class ManagerTest extends WebTestCase
         $this->assertSame($hotel->getCity(), 'Paris');
         $this->assertSame($hotel->getAddress(), 'Paris address');
     }
-
 }
