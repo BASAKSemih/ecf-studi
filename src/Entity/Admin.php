@@ -19,8 +19,11 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 180, unique: true)]
     private string $email;
 
+    /**
+     * @var array<array-key, string>
+     */
     #[ORM\Column(type: 'json')]
-    private array $roles = [];
+    private array $roles = ["ADMINISTRATOR"];
 
     #[ORM\Column(type: 'string')]
     private string $password;
@@ -80,12 +83,12 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
         return array_unique($roles);
     }
 
+    /**
+     * @phpstan-ignore-next-line
+     */
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
@@ -122,10 +125,8 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @see UserInterface
      */
-    public function eraseCredentials()
+    public function eraseCredentials(): void
     {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
     }
 
     public function getFirstName(): ?string
