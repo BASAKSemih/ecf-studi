@@ -61,6 +61,8 @@ jobs:
         run: php bin/phpunit --testsuite integration
       - name: Run Functional Test
         run: php bin/phpunit --testsuite functional
+      - name Generate Code Coverage .XML
+        run: php bin/phpunit --coverage-clover clover.xml
       - name: Anlyse Symfony Configuration YAML
         run: php bin/console lint:yaml config
       - name: Analyze Twig
@@ -81,3 +83,4 @@ jobs:
         uses: codecov/codecov-action@v2.1.0
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+          files: clover.xml

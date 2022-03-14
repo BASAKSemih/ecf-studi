@@ -17,6 +17,8 @@ yarn-error.log
 ###< symfony/webpack-encore-bundle ###
 /.idea
 /html
+clover.xml
+/xml
 ###> friendsofphp/php-cs-fixer ###
 /.php-cs-fixer.php
 /.php-cs-fixer.cache
