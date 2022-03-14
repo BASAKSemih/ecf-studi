@@ -48,4 +48,4 @@ analyse:
 
 test:
 	composer prepare-test
-	vendor/bin/phpunit
+	vendor/bin/phpunit --coverage-html html
