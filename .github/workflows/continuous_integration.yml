@@ -61,7 +61,7 @@ jobs:
         run: php bin/phpunit --testsuite integration
       - name: Run Functional Test
         run: php bin/phpunit --testsuite functional
-      - name Generate Code Coverage .XML
+      - name: Generate Code Coverage .XML
         run: php bin/phpunit --coverage-clover clover.xml
       - name: Anlyse Symfony Configuration YAML
         run: php bin/console lint:yaml config
