@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Repository\AdminRepository;
+use App\Repository\ManagerRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-#[ORM\Entity(repositoryClass: AdminRepository::class)]
-class Admin implements UserInterface, PasswordAuthenticatedUserInterface
+#[ORM\Entity(repositoryClass: ManagerRepository::class)]
+class Manager implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -25,7 +25,7 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
      * @var array<array-key, string>
      */
     #[ORM\Column(type: 'json')]
-    private array $roles = ['ROLE_ADMINISTRATOR'];
+    private array $roles = ['MANAGER'];
 
     #[ORM\Column(type: 'string')]
     private string $password;
@@ -38,6 +38,14 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'datetime_immutable')]
     private DateTimeImmutable $createdAt;
+
+    #[ORM\OneToOne(mappedBy: 'manager', targetEntity: Hotel::class, cascade: ['persist', 'remove'])]
+    private ?Hotel $hotel;
+
+    public function __toString(): string
+    {
+        return $this->getLastName().' '.$this->getFirstName();
+    }
 
     public function __construct()
     {
@@ -164,6 +172,23 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCreatedAt(DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getHotel(): ?Hotel
+    {
+        return $this->hotel;
+    }
+
+    public function setHotel(Hotel $hotel): self
+    {
+        // set the owning side of the relation if necessary
+        if ($hotel->getManager() !== $this) {
+            $hotel->setManager($this);
+        }
+
+        $this->hotel = $hotel;
 
         return $this;
     }

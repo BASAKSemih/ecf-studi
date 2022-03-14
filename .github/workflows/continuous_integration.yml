@@ -57,8 +57,12 @@ jobs:
           php bin/console doctrine:fixtures:load -n
       - name: Run Unit Test
         run: php bin/phpunit --testsuite unit
+      - name: Run Integration Test
+        run: php bin/phpunit --testsuite integration
       - name: Run Functional Test
         run: php bin/phpunit --testsuite functional
+      - name: Generate Code Coverage .XML
+        run: php bin/phpunit --coverage-clover clover.xml
       - name: Anlyse Symfony Configuration YAML
         run: php bin/console lint:yaml config
       - name: Analyze Twig
@@ -69,11 +73,14 @@ jobs:
         run: php bin/console lint:container
       - name: PHP Metrics
         run: php ./vendor/bin/phpmetrics ./src
-      - name: Analyse Copy/Paste Detector (PHPCPD)
-        run: vendor/bin/phpcpd src/
       - name: PHP Mess Detector
         run: vendor/bin/phpmd src/ text .phpmd.xml
       - name: Analyse Quality Code Php Insights
         run: vendor/bin/phpinsights --no-interaction
       - name: Analyse Static Code Php Stan
         run: php vendor/bin/phpstan analyse -c phpstan.neon src --no-progress
+      - name: Code Coverage
+        uses: codecov/codecov-action@v2.1.0
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: clover.xml

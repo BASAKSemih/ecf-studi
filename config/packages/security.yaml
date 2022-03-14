@@ -1,4 +1,7 @@
 security:
+    encoder:
+        App\Entity\Manager:
+            algorithm: auto
     enable_authenticator_manager: true
     # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
     password_hashers:
@@ -35,8 +38,8 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/espace-administrateur/, roles: PUBLIC_ACCESS }
-        - { path: ^/espace-administrateur, roles: ADMINISTRATOR }
+        - { path: ^/espace-administrateur/connexion, roles: PUBLIC_ACCESS }
+        - { path: ^/espace-administrateur, roles: ROLE_ADMINISTRATOR }
         # - { path: ^/profile, roles: ROLE_USER }
 
 when@test:

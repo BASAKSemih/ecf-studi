@@ -72,6 +72,5 @@ class AdminSecurityTest extends WebTestCase
         $crawler = $client->request(Request::METHOD_GET, $router->generate('security_admin_homePage'));
         $client->followRedirect();
         self::assertRouteSame('security_admin_login');
-
     }
 }
