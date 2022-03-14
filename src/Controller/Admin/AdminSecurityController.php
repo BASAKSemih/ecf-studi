@@ -18,7 +18,7 @@ final class AdminSecurityController extends AbstractController
         if ($this->getUser()) {
             $this->addFlash('warning', 'Vous êtes déjà connecter');
 
-            return $this->redirectToRoute('homePage'); //TODO Redirecto to admin crud
+            return $this->redirectToRoute('security_admin_homePage');
         }
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();

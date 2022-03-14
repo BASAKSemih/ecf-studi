@@ -56,7 +56,7 @@ final class AdminAuthenticator extends AbstractLoginFormAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
-        return new RedirectResponse($this->urlGenerator->generate('homePage')); //TODO redirect to admin
+        return new RedirectResponse($this->urlGenerator->generate('security_admin_homePage')); //TODO redirect to admin
     }
 
     protected function getLoginUrl(Request $request): string

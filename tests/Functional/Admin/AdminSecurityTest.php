@@ -23,7 +23,7 @@ class AdminSecurityTest extends WebTestCase
 
         $client->submit($form);
         $client->followRedirect();
-        self::assertRouteSame('homePage');
+        self::assertRouteSame('security_admin_homePage');
     }
 
     public function testAdminLogout(): void
@@ -39,7 +39,7 @@ class AdminSecurityTest extends WebTestCase
 
         $client->submit($form);
         $client->followRedirect();
-        self::assertRouteSame('homePage');
+        self::assertRouteSame('security_admin_homePage');
         $crawler = $client->request(Request::METHOD_GET, $router->generate('security_admin_logout'));
         $client->followRedirect();
         self::assertRouteSame('homePage');
@@ -58,9 +58,20 @@ class AdminSecurityTest extends WebTestCase
 
         $client->submit($form);
         $client->followRedirect();
-        self::assertRouteSame('homePage');
+        self::assertRouteSame('security_admin_homePage');
         $crawler = $client->request(Request::METHOD_GET, $router->generate('security_admin_login'));
         $client->followRedirect();
-        self::assertRouteSame('homePage');
+        self::assertRouteSame('security_admin_homePage');
+    }
+
+    public function testTryingToGoAdminHomePageWithoutConnectedWithAdminAccount(): void
+    {
+        $client = static::createClient();
+        /** @var RouterInterface $router */
+        $router = $client->getContainer()->get('router');
+        $crawler = $client->request(Request::METHOD_GET, $router->generate('security_admin_homePage'));
+        $client->followRedirect();
+        self::assertRouteSame('security_admin_login');
+
     }
 }
