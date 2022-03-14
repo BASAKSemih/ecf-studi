@@ -57,6 +57,8 @@ jobs:
           php bin/console doctrine:fixtures:load -n
       - name: Run Unit Test
         run: php bin/phpunit --testsuite unit
+      - name: Run Integration Test
+        run: php bin/phpunit --testsuite integration
       - name: Run Functional Test
         run: php bin/phpunit --testsuite functional
       - name: Anlyse Symfony Configuration YAML
