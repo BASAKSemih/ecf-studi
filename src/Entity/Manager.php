@@ -7,7 +7,6 @@ namespace App\Entity;
 use App\Repository\ManagerRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
-use JetBrains\PhpStorm\Pure;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -43,11 +42,10 @@ class Manager implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToOne(mappedBy: 'manager', targetEntity: Hotel::class, cascade: ['persist', 'remove'])]
     private ?Hotel $hotel;
 
-    #[Pure]
- public function __toString(): string
- {
-     return $this->getLastName().' '.$this->getFirstName();
- }
+    public function __toString(): string
+    {
+        return $this->getLastName().' '.$this->getFirstName();
+    }
 
     public function __construct()
     {

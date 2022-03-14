@@ -31,6 +31,7 @@ class ManagerCrudController extends AbstractCrudController
         ];
     }
 
+    /** @phpstan-ignore-next-line  */
     public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
         /* @var Manager $entityInstance */
