@@ -54,8 +54,7 @@ class ManagerAuthenticator extends AbstractLoginFormAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
-        dd("connected"); //TODO remove dd and redirect to manager admin pannel
-        return new RedirectResponse($this->urlGenerator->generate('security_admin_homePage'));
+        return new RedirectResponse($this->urlGenerator->generate('security_manager_homePage'));
     }
 
     protected function getLoginUrl(Request $request): string
