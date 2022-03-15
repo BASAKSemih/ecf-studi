@@ -16,5 +16,4 @@ final class ManagerController extends AbstractController
     {
         return $this->render('manager/home/index.html.twig');
     }
-
 }

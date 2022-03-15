@@ -61,5 +61,4 @@ class ManagerSecurityTest extends WebTestCase
         $client->followRedirect();
         self::assertRouteSame('security_manager_homePage');
     }
-
 }

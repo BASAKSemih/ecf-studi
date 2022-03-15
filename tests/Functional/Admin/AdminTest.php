@@ -6,7 +6,6 @@ namespace App\Tests\Functional\Admin;
 
 use App\Controller\Admin\AdminCrudController;
 use App\Controller\Admin\AdminDashBoardController;
-use App\Controller\Admin\ManagerCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -82,5 +81,4 @@ final class AdminTest extends WebTestCase
         $client->submit($form);
         self::assertResponseStatusCodeSame(Response::HTTP_FOUND);
     }
-
 }
