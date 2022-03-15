@@ -39,4 +39,12 @@ class ManagerCrudController extends AbstractCrudController
         $entityManager->persist($entityInstance);
         $entityManager->flush();
     }
+
+    /** @phpstan-ignore-next-line  */
+    public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        /* @var Manager $entityInstance */
+        $entityInstance->setPassword($this->passwordHasher->hashPassword($entityInstance, $entityInstance->getPassword()));
+        $entityManager->flush();
+    }
 }

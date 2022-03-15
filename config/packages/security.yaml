@@ -35,6 +35,7 @@ security:
         admin:
             lazy: true
             provider: app_admin_provider
+            pattern:  ^/espace-administrateur
             custom_authenticator: App\Security\Admin\AdminAuthenticator
             logout:
                 path: security_admin_logout
