@@ -23,6 +23,7 @@ class ManagerSecurityTest extends WebTestCase
         $client->followRedirect();
         self::assertRouteSame('security_manager_homePage');
     }
+
     public function testManagerLogout(): void
     {
         $client = static::createClient();
@@ -40,6 +41,25 @@ class ManagerSecurityTest extends WebTestCase
         $crawler = $client->request(Request::METHOD_GET, $router->generate('security_manager_logout'));
         $client->followRedirect();
         self::assertRouteSame('homePage');
+    }
+
+    public function testManagerAlreadyLoginRedirectToHomePage(): void
+    {
+        $client = static::createClient();
+        /** @var RouterInterface $router */
+        $router = $client->getContainer()->get('router');
+        $crawler = $client->request(Request::METHOD_GET, $router->generate('security_manager_login'));
+        $form = $crawler->filter('form[name=login]')->form([
+            'email' => 'solene@liz.com',
+            'password' => 'password',
+        ]);
+
+        $client->submit($form);
+        $client->followRedirect();
+        self::assertRouteSame('security_manager_homePage');
+        $crawler = $client->request(Request::METHOD_GET, $router->generate('security_manager_login'));
+        $client->followRedirect();
+        self::assertRouteSame('security_manager_homePage');
     }
 
 }

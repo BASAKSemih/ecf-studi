@@ -45,4 +45,40 @@ final class AdminManagerTest extends WebTestCase
         $client->submit($form);
         self::assertResponseStatusCodeSame(Response::HTTP_FOUND);
     }
+
+    public function testAdminEditManager(): void
+    {
+        $client = static::createClient();
+        /** @var RouterInterface $router */
+        $router = $client->getContainer()->get('router');
+        $crawler = $client->request(Request::METHOD_GET, $router->generate('security_admin_login'));
+        $form = $crawler->filter('form[name=login]')->form([
+            'email' => 'john@doe.com',
+            'password' => 'password',
+        ]);
+
+        $client->submit($form);
+        $client->followRedirect();
+        self::assertRouteSame('security_admin_homePage');
+
+        /** @var AdminUrlGenerator $urlGenerator */
+        $adminUrlGenerator = $client->getContainer()->get(AdminUrlGenerator::class);
+        $client->request('GET', (string)
+        $adminUrlGenerator->setController(ManagerCrudController::class)
+            ->setAction(Action::EDIT)
+            ->setDashboard(AdminDashBoardController::class)
+            ->setEntityId(1)
+            ->generateUrl());
+        self::assertResponseIsSuccessful();
+        self::assertRouteSame('security_admin_homePage');
+
+        $client->submitForm('Save changes', [
+            'Manager[lastName]' => 'Joe',
+            'Manager[firstName]' => 'Joe',
+            'Manager[email]' => 'fred@joe.com',
+            'Manager[password]' => 'password',
+        ]);
+        $client->submit($form);
+        self::assertResponseStatusCodeSame(Response::HTTP_FOUND);
+    }
 }

@@ -16,7 +16,7 @@ class ManagerSecurityController extends AbstractController
         if ($this->getUser()) {
             $this->addFlash('warning', 'Vous êtes déjà connecter');
 
-            return $this->redirectToRoute('security_admin_homePage');
+            return $this->redirectToRoute('security_manager_homePage');
         }
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
@@ -27,6 +27,5 @@ class ManagerSecurityController extends AbstractController
     #[Route(path: '/espace-manager/deconnexion', name: 'logout')]
     public function logout(): void
     {
-        throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 }

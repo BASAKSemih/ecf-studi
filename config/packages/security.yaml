@@ -32,6 +32,7 @@ security:
             custom_authenticator: App\Security\Manager\ManagerAuthenticator
             logout:
                 path: security_manager_logout
+                target: homePage
         admin:
             lazy: true
             provider: app_admin_provider
@@ -39,8 +40,7 @@ security:
             custom_authenticator: App\Security\Admin\AdminAuthenticator
             logout:
                 path: security_admin_logout
-                # where to redirect after logout
-                # target: app_any_route
+                target: homePage
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
