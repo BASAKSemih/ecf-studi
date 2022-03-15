@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
+use App\Entity\Admin;
 use App\Entity\Hotel;
 use App\Entity\Manager;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -30,6 +31,7 @@ final class AdminDashBoardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
+        yield MenuItem::linkToCrud('Crée un Admin', 'fas fa-list', Admin::class);
         yield MenuItem::linkToCrud('Crée un Manager', 'fas fa-list', Manager::class);
         yield MenuItem::linkToCrud('Crée un Hotel', 'fas fa-list', Hotel::class);
     }
