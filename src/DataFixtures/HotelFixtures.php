@@ -10,7 +10,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-class HotelFixtures extends Fixture
+final class HotelFixtures extends Fixture
 {
     public function __construct(private UserPasswordHasherInterface $userPasswordHasher)
     {
