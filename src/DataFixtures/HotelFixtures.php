@@ -6,6 +6,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Hotel;
 use App\Entity\Manager;
+use App\Entity\Room;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -36,6 +37,17 @@ final class HotelFixtures extends Fixture
             ->setDescription('The best Paris hotel');
 
         $objectManager->persist($hotel);
+        $objectManager->flush();
+
+        $room = new Room();
+        $room
+            ->setHotel($hotel)
+            ->setName('Best Room')
+            ->setDescription('description room')
+            ->setPrice(1000)
+            ->setMainPicture('path picture');
+
+        $objectManager->persist($room);
         $objectManager->flush();
     }
 }
