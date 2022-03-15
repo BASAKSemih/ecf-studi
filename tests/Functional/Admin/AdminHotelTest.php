@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional\Admin;
 
+use App\Controller\Admin\AdminDashBoardController;
 use App\Controller\Admin\HotelCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
@@ -31,7 +32,7 @@ final class AdminHotelTest extends WebTestCase
 
         /** @var AdminUrlGenerator $urlGenerator */
         $adminUrlGenerator = $client->getContainer()->get(AdminUrlGenerator::class);
-        $client->request('GET', (string) $adminUrlGenerator->setController(HotelCrudController::class)->setAction(Action::NEW)->generateUrl());
+        $client->request('GET', (string) $adminUrlGenerator->setController(HotelCrudController::class)->setAction(Action::NEW)->setDashboard(AdminDashBoardController::class)->generateUrl());
         self::assertResponseIsSuccessful();
         self::assertRouteSame('security_admin_homePage');
 
