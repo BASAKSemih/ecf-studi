@@ -22,7 +22,8 @@ final class RoomController extends AbstractController
         protected EntityManagerInterface $entityManager,
         protected Security $security,
         protected HotelRepository $hotelRepository,
-        protected RoomRepository $roomRepository) {
+        protected RoomRepository $roomRepository)
+    {
     }
 
     #[Route('/espace-manager/ajouter-une-suite/{idHotel}', name: 'create')]
