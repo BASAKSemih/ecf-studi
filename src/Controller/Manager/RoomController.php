@@ -69,8 +69,9 @@ final class RoomController extends AbstractController
 
             return $this->redirectToRoute('security_manager_homePage');
         }
-        if ($access === false) {
+        if (false === $access) {
             $this->addFlash('warning', "La chambre n'appartient pas a hotel que vous gèrer");
+
             return $this->redirectToRoute('security_manager_homePage');
         }
         $form = $this->createForm(RoomType::class, $room)->handleRequest($request);

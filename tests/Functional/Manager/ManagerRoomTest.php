@@ -163,7 +163,6 @@ final class ManagerRoomTest extends WebTestCase
         self::assertRouteSame('security_manager_homePage');
     }
 
-
     public function testManagerEditRoomNotOwnedHotel(): void
     {
         $client = static::createClient();
