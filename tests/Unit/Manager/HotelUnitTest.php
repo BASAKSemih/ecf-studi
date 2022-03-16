@@ -52,8 +52,8 @@ final class HotelUnitTest extends TestCase
         $this->assertSame($hotel->getManager(), $manager);
         $this->assertSame($hotel->getDescription(), 'Hotel descr');
         $this->assertSame($hotel->getCreatedAt(), $dateTime);
+        $this->assertSame($hotel->getSlug(), '');
         $this->assertNull($hotel->getId());
-        $this->assertNull($hotel->getSlug());
         $this->assertArrayHasKey('0', $hotel->getRooms());
 
         $room = new Room();
@@ -69,7 +69,7 @@ final class HotelUnitTest extends TestCase
         $this->assertSame($room->getPrice(), 1000);
         $this->assertSame($room->getMainPicture(), 'path picture');
         $this->assertSame($room->getHotel(), $hotel);
-        $this->assertNull($room->getSlug());
+        $this->assertSame($room->getSlug(), '');
         $this->assertNull($room->getId());
     }
 }

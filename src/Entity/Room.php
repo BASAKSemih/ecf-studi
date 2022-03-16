@@ -34,7 +34,7 @@ class Room
 
     #[ORM\Column(type: 'string', length: 255)]
     #[Gedmo\Slug(fields: ['name'])]
-    private ?string $slug = null;
+    private string $slug = '';
 
     public function getId(): ?int
     {
