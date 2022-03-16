@@ -33,7 +33,7 @@ final class ManagerRoomTest extends WebTestCase
         /** @var Hotel $hotel */
         $hotel = $hotelRepository->findOneByManager($manager);
         $crawler = $client->request(Request::METHOD_GET, $router->generate('manager_room_create', [
-            'idHotel' => $hotel->getId()
+            'idHotel' => $hotel->getId(),
         ]));
         self::assertRouteSame('manager_room_create');
         $form = $crawler->filter('form[name=room]')->form([
@@ -62,7 +62,7 @@ final class ManagerRoomTest extends WebTestCase
         $client->followRedirect();
         self::assertRouteSame('security_manager_homePage');
         $crawler = $client->request(Request::METHOD_GET, $router->generate('manager_room_create', [
-            'idHotel' => 99999
+            'idHotel' => 99999,
         ]));
         $client->followRedirect();
         self::assertRouteSame('security_manager_homePage');

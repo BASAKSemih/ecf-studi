@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Controller\Manager;
 
-use App\Entity\Manager;
 use App\Entity\Room;
 use App\Form\RoomType;
 use App\Repository\HotelRepository;
@@ -28,6 +27,7 @@ final class RoomController extends AbstractController
         $hotel = $this->hotelRepository->findOneById($idHotel);
         if (!$hotel) {
             $this->addFlash('warning', "L'Hote n'existe pas");
+
             return $this->redirectToRoute('security_manager_homePage');
         }
         $this->security->isGranted('IS_OWNER', $hotel);
@@ -39,11 +39,12 @@ final class RoomController extends AbstractController
             $this->entityManager->persist($room);
             $this->entityManager->flush();
             $this->addFlash('success', 'La suite à bien été crée');
+
             return $this->redirectToRoute('security_manager_homePage'); // TODO redirect to room show page
         }
+
         return $this->render('manager/room/create.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
-
 }

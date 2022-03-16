@@ -10,7 +10,6 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 final class ManagerVoter extends Voter
 {
-
     protected function supports(string $attribute, $subject): bool
     {
         return 'IS_OWNER' === $attribute
@@ -20,7 +19,7 @@ final class ManagerVoter extends Voter
     protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool
     {
         $manager = $token->getUser();
-        /** @var Hotel $subject */
+        /* @var Hotel $subject */
         return $subject->getManager() === $manager;
     }
 }
