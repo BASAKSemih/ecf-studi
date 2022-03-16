@@ -114,7 +114,7 @@ class Hotel
         return $this;
     }
 
-    public function getManager(): ?Manager
+    public function getManager(): Manager
     {
         return $this->manager;
     }
