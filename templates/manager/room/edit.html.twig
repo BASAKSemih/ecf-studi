@@ -3,7 +3,7 @@
 {% block body %}
 
     <div class="container">
-        <h1 class="h3 mb-3 font-weight-normal mt-5 pt-5">Room Edit</h1>
+        <h1 class="h3 mb-3 font-weight-normal mt-5 pt-5">Room Create</h1>
         {{ form_start(form) }}
         <label for="">Titre de la suite </label>
         {{ form_row(form.name) }}
@@ -13,7 +13,7 @@
         {{ form_row(form.price) }}
         <label for="">Description de la suite</label>
         {{ form_row(form.mainPicture) }}
-        {{ form_widget(form.submit, {'label': 'Edit la suite'}) }}
+        {{ form_widget(form.submit, {'label': 'Crée la suite'}) }}
         {{ form_end(form) }}
     </div>
 {% endblock %}
