@@ -6,6 +6,7 @@ namespace App\Entity;
 
 use App\Repository\RoomRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 #[ORM\Entity(repositoryClass: RoomRepository::class)]
 class Room
@@ -30,6 +31,10 @@ class Room
     #[ORM\ManyToOne(targetEntity: Hotel::class, inversedBy: 'rooms')]
     #[ORM\JoinColumn(nullable: false)]
     private Hotel $hotel;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    #[Gedmo\Slug(fields: ['name'])]
+    private ?string $slug = null;
 
     public function getId(): ?int
     {
@@ -94,5 +99,10 @@ class Room
         $this->hotel = $hotel;
 
         return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
     }
 }
