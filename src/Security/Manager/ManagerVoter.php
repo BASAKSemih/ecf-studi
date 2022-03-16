@@ -19,7 +19,8 @@ final class ManagerVoter extends Voter
     protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool
     {
         $manager = $token->getUser();
-        /* @var Hotel $subject */
+
+        /** @var Hotel $subject */
         return $subject->getManager() === $manager;
     }
 }
