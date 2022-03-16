@@ -53,7 +53,7 @@ final class RoomController extends AbstractController
         ]);
     }
 
-    #[Route('/espace-manager/ajouter-une-suite/{idHotel}/{idRoom}', name: 'edit')]
+    #[Route('/espace-manager/modifier-une-suite/{idHotel}/{idRoom}', name: 'edit')]
     public function editRoom(int $idHotel, int $idRoom, Request $request): Response
     {
         $hotel = $this->hotelRepository->findOneById($idHotel);
@@ -85,5 +85,34 @@ final class RoomController extends AbstractController
         return $this->render('manager/room/edit.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+
+    #[Route('/espace-manager/supprimer-une-suite/{idHotel}/{idRoom}', name: 'delete')]
+    public function deleteRoom(int $idHotel, int $idRoom, Request $request): Response
+    {
+        $hotel = $this->hotelRepository->findOneById($idHotel);
+        if (!$hotel) {
+            $this->addFlash('warning', "L'Hote n'existe pas");
+
+            return $this->redirectToRoute('security_manager_homePage');
+        }
+        $access = $this->security->isGranted('IS_OWNER', $hotel);
+        $room = $this->roomRepository->findOneById($idRoom);
+        if (!$room) {
+            $this->addFlash('warning', "La chambre hotel n'existe pas");
+
+            return $this->redirectToRoute('security_manager_homePage');
+        }
+        if (false === $access) {
+            $this->addFlash('warning', "La chambre n'appartient pas a hotel que vous gèrer");
+
+            return $this->redirectToRoute('security_manager_homePage');
+        }
+        $this->entityManager->remove($room);
+        $this->entityManager->flush();
+
+        $this->addFlash('success', 'La suite à bien été supprimé');
+
+        return $this->redirectToRoute('security_manager_homePage'); // TODO redirect to room show page
     }
 }

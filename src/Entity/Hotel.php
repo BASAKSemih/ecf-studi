@@ -33,7 +33,7 @@ class Hotel
     #[ORM\Column(type: 'datetime_immutable')]
     private DateTimeImmutable $createdAt;
 
-    #[ORM\OneToOne(inversedBy: 'hotel', targetEntity: Manager::class, cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(inversedBy: 'hotel', targetEntity: Manager::class)]
     #[ORM\JoinColumn(nullable: false)]
     private Manager $manager;
 

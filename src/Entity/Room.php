@@ -28,7 +28,7 @@ class Room
     private string $mainPicture;
 
     #[ORM\ManyToOne(targetEntity: Hotel::class, inversedBy: 'rooms')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private Hotel $hotel;
 
     public function getId(): ?int
@@ -89,7 +89,7 @@ class Room
         return $this->hotel;
     }
 
-    public function setHotel(Hotel $hotel): self
+    public function setHotel(?Hotel $hotel): self
     {
         $this->hotel = $hotel;
 
