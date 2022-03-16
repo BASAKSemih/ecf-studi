@@ -6,7 +6,10 @@ namespace App\Entity;
 
 use App\Repository\HotelRepository;
 use DateTimeImmutable;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 #[ORM\Entity(repositoryClass: HotelRepository::class)]
 class Hotel
@@ -31,13 +34,24 @@ class Hotel
     #[ORM\Column(type: 'datetime_immutable')]
     private DateTimeImmutable $createdAt;
 
-    #[ORM\OneToOne(inversedBy: 'hotel', targetEntity: Manager::class, cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(inversedBy: 'hotel', targetEntity: Manager::class)]
     #[ORM\JoinColumn(nullable: false)]
     private Manager $manager;
+
+    /**
+     * @var Collection<Room>
+     */
+    #[ORM\OneToMany(mappedBy: 'hotel', targetEntity: Room::class)]
+    private Collection $rooms;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    #[Gedmo\Slug(fields: ['name'])]
+    private string $slug = '';
 
     public function __construct()
     {
         $this->createdAt = new DateTimeImmutable();
+        $this->rooms = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -105,7 +119,7 @@ class Hotel
         return $this;
     }
 
-    public function getManager(): ?Manager
+    public function getManager(): Manager
     {
         return $this->manager;
     }
@@ -115,5 +129,28 @@ class Hotel
         $this->manager = $manager;
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, Room>
+     */
+    public function getRooms(): Collection
+    {
+        return $this->rooms;
+    }
+
+    public function addRoom(Room $room): self
+    {
+        if (!$this->rooms->contains($room)) {
+            $this->rooms[] = $room;
+            $room->setHotel($this);
+        }
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
     }
 }
