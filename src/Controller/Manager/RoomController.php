@@ -62,17 +62,15 @@ final class RoomController extends AbstractController
 
             return $this->redirectToRoute('security_manager_homePage');
         }
-        $this->security->isGranted('IS_OWNER', $hotel);
-        $this->denyAccessUnlessGranted('IS_OWNER', $hotel, "L'hotel ne vous appartient pas");
+        $access = $this->security->isGranted('IS_OWNER', $hotel);
         $room = $this->roomRepository->findOneById($idRoom);
         if (!$room) {
             $this->addFlash('warning', "La chambre hotel n'existe pas");
 
             return $this->redirectToRoute('security_manager_homePage');
         }
-        if ($room->getHotel() !== $hotel) {
+        if ($access === false) {
             $this->addFlash('warning', "La chambre n'appartient pas a hotel que vous gèrer");
-
             return $this->redirectToRoute('security_manager_homePage');
         }
         $form = $this->createForm(RoomType::class, $room)->handleRequest($request);

@@ -162,4 +162,36 @@ final class ManagerRoomTest extends WebTestCase
         $client->followRedirect();
         self::assertRouteSame('security_manager_homePage');
     }
+
+
+    public function testManagerEditRoomNotOwnedHotel(): void
+    {
+        $client = static::createClient();
+        /** @var RouterInterface $router */
+        $router = $client->getContainer()->get('router');
+        $crawler = $client->request(Request::METHOD_GET, $router->generate('security_manager_login'));
+        $form = $crawler->filter('form[name=login]')->form([
+            'email' => 'julie@liz.com',
+            'password' => 'password',
+        ]);
+
+        $client->submit($form);
+        $client->followRedirect();
+        self::assertRouteSame('security_manager_homePage');
+        $entityManager = $client->getContainer()->get('doctrine.orm.entity_manager');
+        $managerRepository = $entityManager->getRepository(Manager::class);
+        $manager = $managerRepository->findOneByEmail('paul@bernard.com');
+        $roomRepository = $entityManager->getRepository(Room::class);
+        /** @var Room $room */
+        $room = $roomRepository->findOneByName('Best Room with A good suite in paris visual');
+        $hotelRepository = $entityManager->getRepository(Hotel::class);
+        /** @var Hotel $hotel */
+        $hotel = $hotelRepository->findOneByManager($manager);
+        $crawler = $client->request(Request::METHOD_GET, $router->generate('manager_room_edit', [
+            'idHotel' => $hotel->getId(),
+            'idRoom' => $room->getId(),
+        ]));
+        $client->followRedirect();
+        self::assertRouteSame('security_manager_homePage');
+    }
 }
