@@ -120,7 +120,8 @@ final class ManagerRoomTest extends WebTestCase
         ]);
 
         $client->submit($form);
-        $client->followRedirect(); self::assertRouteSame('security_manager_homePage');
+        $client->followRedirect();
+        self::assertRouteSame('security_manager_homePage');
         $entityManager = $client->getContainer()->get('doctrine.orm.entity_manager');
         $managerRepository = $entityManager->getRepository(Manager::class);
         $manager = $managerRepository->findOneByEmail('julie@liz.com');
