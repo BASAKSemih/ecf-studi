@@ -107,4 +107,58 @@ final class ManagerRoomTest extends WebTestCase
         $client->followRedirect();
         self::assertRouteSame('security_manager_homePage');
     }
+
+    public function testManagerEditRoomWithNoRoomExist(): void
+    {
+        $client = static::createClient();
+        /** @var RouterInterface $router */
+        $router = $client->getContainer()->get('router');
+        $crawler = $client->request(Request::METHOD_GET, $router->generate('security_manager_login'));
+        $form = $crawler->filter('form[name=login]')->form([
+            'email' => 'julie@liz.com',
+            'password' => 'password',
+        ]);
+
+        $client->submit($form);
+        $client->followRedirect(); self::assertRouteSame('security_manager_homePage');
+        $entityManager = $client->getContainer()->get('doctrine.orm.entity_manager');
+        $managerRepository = $entityManager->getRepository(Manager::class);
+        $manager = $managerRepository->findOneByEmail('julie@liz.com');
+        $hotelRepository = $entityManager->getRepository(Hotel::class);
+        /** @var Hotel $hotel */
+        $hotel = $hotelRepository->findOneByManager($manager);
+        $crawler = $client->request(Request::METHOD_GET, $router->generate('manager_room_edit', [
+            'idHotel' => $hotel->getId(),
+            'idRoom' => 99999,
+        ]));
+        $client->followRedirect();
+        self::assertRouteSame('security_manager_homePage');
+    }
+
+    public function testManagerEditRoomWithNoHotelExist(): void
+    {
+        $client = static::createClient();
+        /** @var RouterInterface $router */
+        $router = $client->getContainer()->get('router');
+        $crawler = $client->request(Request::METHOD_GET, $router->generate('security_manager_login'));
+        $form = $crawler->filter('form[name=login]')->form([
+            'email' => 'julie@liz.com',
+            'password' => 'password',
+        ]);
+
+        $client->submit($form);
+        $client->followRedirect();
+        self::assertRouteSame('security_manager_homePage');
+
+        $entityManager = $client->getContainer()->get('doctrine.orm.entity_manager');
+        $roomRepository = $entityManager->getRepository(Room::class);
+        /** @var Room $room */
+        $room = $roomRepository->findOneByName('Best Room with A good suite in paris visual');
+        $crawler = $client->request(Request::METHOD_GET, $router->generate('manager_room_edit', [
+            'idHotel' => 9999,
+            'idRoom' => $room->getId(),
+        ]));
+        $client->followRedirect();
+        self::assertRouteSame('security_manager_homePage');
+    }
 }
