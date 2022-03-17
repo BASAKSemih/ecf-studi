@@ -61,7 +61,7 @@ jobs:
         run: php bin/phpunit --testsuite integration
       - name: Run Functional Test
         run: php bin/phpunit --testsuite functional
-      - name: Prepare database
+      - name: Prepare database for coverage
         run: |
             php bin/console d:d:d --if-exists --force --env=test
             php bin/console d:d:c --env=test
