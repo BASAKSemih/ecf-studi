@@ -25,5 +25,14 @@ final class ManagerFixtures extends Fixture
             ->setPassword($this->userPasswordHasher->hashPassword($manager, 'password'));
         $objectManager->persist($manager);
         $objectManager->flush();
+
+        $manager2 = new Manager();
+        $manager2
+            ->setFirstName('Julian')
+            ->setLastName('Dolerni')
+            ->setEmail('julian@dolerni.com')
+            ->setPassword($this->userPasswordHasher->hashPassword($manager2, 'password'));
+        $objectManager->persist($manager2);
+        $objectManager->flush();
     }
 }

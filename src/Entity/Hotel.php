@@ -46,7 +46,7 @@ class Hotel
 
     #[ORM\Column(type: 'string', length: 255)]
     #[Gedmo\Slug(fields: ['name'])]
-    private string $slug = '';
+    private string $slug;
 
     public function __construct()
     {
@@ -152,5 +152,12 @@ class Hotel
     public function getSlug(): ?string
     {
         return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
     }
 }
