@@ -12,9 +12,8 @@ use Symfony\Component\Routing\Annotation\Route;
 final class HomeController extends AbstractController
 {
     #[Route('/', name: 'homePage')]
-    public function home(HotelRepository $hotelRepository): Response
+    public function home(): Response
     {
-        dd($hotelRepository->getFreeHotel());
         return $this->render('home/home.html.twig');
     }
 }
