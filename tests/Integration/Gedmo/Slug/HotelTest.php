@@ -15,7 +15,15 @@ final class HotelTest extends WebTestCase
         $client = static::createClient();
         $entityManager = $client->getContainer()->get('doctrine.orm.entity_manager');
         $managerRepository = $entityManager->getRepository(Manager::class);
-        $manager = $managerRepository->findOneByEmail('julian@dolerni.com');
+
+        $manager = new Manager();
+        $manager
+            ->setFirstName('Testtt')
+            ->setLastName('Testtt')
+            ->setEmail('testtt@liz.com')
+            ->setPassword('dontusethat');
+        $entityManager->persist($manager);
+        $entityManager->flush();;
         $hotel = new Hotel();
         $hotel
             ->setName('Hotel Name Slug Test')
