@@ -6,7 +6,6 @@ namespace App\Tests\Integration\Gedmo\Slug;
 
 use App\Entity\Hotel;
 use App\Entity\Manager;
-use App\Entity\Room;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 final class HotelTest extends WebTestCase
@@ -26,6 +25,6 @@ final class HotelTest extends WebTestCase
             ->setDescription('Hotel descr');
         $entityManager->persist($hotel);
         $entityManager->flush();
-        $this->assertSame($hotel->getSlug(), "hotel-name-slug-test");
+        $this->assertSame($hotel->getSlug(), 'hotel-name-slug-test');
     }
 }

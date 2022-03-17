@@ -25,7 +25,6 @@ final class RoomTest extends WebTestCase
             ->setMainPicture('path picture');
         $entityManager->persist($room);
         $entityManager->flush();
-        $this->assertSame($room->getSlug(), "test-if-slug-work");
+        $this->assertSame($room->getSlug(), 'test-if-slug-work');
     }
-
 }
