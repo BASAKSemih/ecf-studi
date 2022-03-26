@@ -34,7 +34,7 @@ class Room
 
     #[ORM\Column(type: 'string', length: 255)]
     #[Gedmo\Slug(fields: ['name'])]
-    private string $slug = '';
+    private string $slug;
 
     public function getId(): ?int
     {
@@ -101,8 +101,15 @@ class Room
         return $this;
     }
 
-    public function getSlug(): ?string
+    public function getSlug(): string
     {
         return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
     }
 }
