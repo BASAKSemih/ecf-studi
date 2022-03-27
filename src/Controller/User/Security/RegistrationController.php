@@ -20,7 +20,7 @@ final class RegistrationController extends AbstractController
     {
     }
 
-    #[Route('/espace-utilisateur/inscription', name: 'user_registration')]
+    #[Route('/espace-utilisateur/inscription', name: 'security_user_registration')]
     public function registration(Request $request): Response
     {
         if ($this->getUser()) {
