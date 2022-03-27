@@ -22,6 +22,10 @@ security:
             entity:
                 class: App\Entity\Manager
                 property: email
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: email
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -40,6 +44,14 @@ security:
             custom_authenticator: App\Security\Admin\AdminAuthenticator
             logout:
                 path: security_admin_logout
+                target: homePage
+        user:
+            lazy: true
+            provider: app_user_provider
+            pattern: ^/espace-utilisateur
+            custom_authenticator: App\Security\User\Authenticator
+            logout:
+                path: security_user_logout
                 target: homePage
 
             # activate different ways to authenticate
