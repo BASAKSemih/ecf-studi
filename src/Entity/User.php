@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Repository\ManagerRepository;
+use App\Repository\UserRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-#[ORM\Entity(repositoryClass: ManagerRepository::class)]
-class Manager implements UserInterface, PasswordAuthenticatedUserInterface
+#[ORM\Entity(repositoryClass: UserRepository::class)]
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -25,7 +25,7 @@ class Manager implements UserInterface, PasswordAuthenticatedUserInterface
      * @var array<array-key, string>
      */
     #[ORM\Column(type: 'json')]
-    private array $roles = ['ROLE_MANAGER'];
+    private array $roles = ['ROLE_USER'];
 
     #[ORM\Column(type: 'string')]
     private string $password;
@@ -39,13 +39,8 @@ class Manager implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'datetime_immutable')]
     private DateTimeImmutable $createdAt;
 
-    #[ORM\OneToOne(mappedBy: 'manager', targetEntity: Hotel::class, cascade: ['persist', 'remove'])]
-    private ?Hotel $hotel;
-
-    public function __toString(): string
-    {
-        return $this->getLastName().' '.$this->getFirstName();
-    }
+    #[ORM\Column(type: 'boolean')]
+    private bool $isVerified = false;
 
     public function __construct()
     {
@@ -93,6 +88,8 @@ class Manager implements UserInterface, PasswordAuthenticatedUserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
     }
@@ -176,19 +173,14 @@ class Manager implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getHotel(): ?Hotel
+    public function getIsVerified(): ?bool
     {
-        return $this->hotel;
+        return $this->isVerified;
     }
 
-    public function setHotel(Hotel $hotel): self
+    public function setIsVerified(bool $isVerified): self
     {
-        // set the owning side of the relation if necessary
-        if ($hotel->getManager() !== $this) {
-            $hotel->setManager($this);
-        }
-
-        $this->hotel = $hotel;
+        $this->isVerified = $isVerified;
 
         return $this;
     }

@@ -23,7 +23,7 @@ final class HotelTest extends WebTestCase
             ->setEmail('testtt@liz.com')
             ->setPassword('dontusethat');
         $entityManager->persist($manager);
-        $entityManager->flush();;
+        $entityManager->flush();
         $hotel = new Hotel();
         $hotel
             ->setName('Hotel Name Slug Test')
