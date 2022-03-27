@@ -54,7 +54,7 @@ class UserAuthenticator extends AbstractLoginFormAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
-        return new RedirectResponse($this->urlGenerator->generate('homePage'));// todo redirect to user homepage
+        return new RedirectResponse($this->urlGenerator->generate('user_homePage'));
     }
 
     protected function getLoginUrl(Request $request): string

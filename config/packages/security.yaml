@@ -49,7 +49,7 @@ security:
             lazy: true
             provider: app_user_provider
             pattern: ^/espace-utilisateur
-            custom_authenticator: App\Security\User\Authenticator
+            custom_authenticator: App\Security\User\UserAuthenticator
             logout:
                 path: security_user_logout
                 target: homePage

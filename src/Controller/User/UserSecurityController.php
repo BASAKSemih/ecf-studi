@@ -18,7 +18,7 @@ class UserSecurityController extends AbstractController
         if ($this->getUser()) {
             $this->addFlash('warning', 'Vous êtes déjà connecter');
 
-            return $this->redirectToRoute('homePage');//TODO redirect to user homepage
+            return $this->redirectToRoute('user_homePage');
         }
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();

@@ -26,7 +26,7 @@ final class RegistrationController extends AbstractController
         if ($this->getUser()) {
             $this->addFlash('warning', 'Vous êtes déjà connecter, vous ne pouvez pas vous inscrire');
 
-            return $this->redirectToRoute('homePage');
+            return $this->redirectToRoute('user_homePage');
         }
         $user = new User();
         $form = $this->createForm(UserType::class, $user)->handleRequest($request);
@@ -39,7 +39,7 @@ final class RegistrationController extends AbstractController
                 $this->entityManager->flush();
                 $this->addFlash('success', "inscription réussiste");
 
-                return $this->redirectToRoute('homePage'); // TODO Redirect to login route
+                return $this->redirectToRoute('security_user_login');
             }
         }
 
