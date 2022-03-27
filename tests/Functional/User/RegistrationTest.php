@@ -30,7 +30,7 @@ class RegistrationTest extends WebTestCase
         $entityManager = $client->getContainer()->get('doctrine.orm.entity_manager');
         $userRepository = $entityManager->getRepository(User::class);
         $user = $userRepository->findOneByEmail('user@yahoo.com');
-        $this->assertSame($user->getLastName(), "user");
+        $this->assertSame($user->getLastName(), 'user');
     }
 
     public function testUserAuthenticatedGoingOnRegistrationUrl(): void

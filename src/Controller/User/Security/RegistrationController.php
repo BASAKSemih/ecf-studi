@@ -37,7 +37,7 @@ final class RegistrationController extends AbstractController
                 $user->setPassword($passwordHash);
                 $this->entityManager->persist($user);
                 $this->entityManager->flush();
-                $this->addFlash('success', "inscription réussiste");
+                $this->addFlash('success', 'inscription réussiste');
 
                 return $this->redirectToRoute('security_user_login');
             }
@@ -45,5 +45,4 @@ final class RegistrationController extends AbstractController
 
         return $this->render('user/register.html.twig', ['form' => $form->createView()]);
     }
-
 }
