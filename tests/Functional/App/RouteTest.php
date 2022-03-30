@@ -20,6 +20,7 @@ final class RouteTest extends WebTestCase
         $crawler = $client->request(Request::METHOD_GET, $router->generate('homePage'));
         self::assertRouteSame('homePage');
     }
+
     public function testShowHotelById(): void
     {
         $client = static::createClient();
@@ -32,6 +33,18 @@ final class RouteTest extends WebTestCase
             'idHotel' => $hotel->getId()
         ]));
         self::assertRouteSame('user_show_hotel');
+    }
+
+    public function testShowHotelWithNotExist(): void
+    {
+        $client = static::createClient();
+        /** @var RouterInterface $router */
+        $router = $client->getContainer()->get('router');
+        $crawler = $client->request(Request::METHOD_GET, $router->generate('user_show_hotel', [
+            'idHotel' => 99999
+        ]));
+        $client->followRedirect();
+        self::assertRouteSame('homePage');
     }
 
 }
