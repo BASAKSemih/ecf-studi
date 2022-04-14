@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use App\Repository\BookingRepository;
@@ -52,24 +54,24 @@ class Booking
         return $this;
     }
 
-    public function getCheckIn(): ?\DateTimeImmutable
+    public function getCheckIn(): ?DateTimeImmutable
     {
         return $this->checkIn;
     }
 
-    public function setCheckIn(\DateTimeImmutable $checkIn): self
+    public function setCheckIn(DateTimeImmutable $checkIn): self
     {
         $this->checkIn = $checkIn;
 
         return $this;
     }
 
-    public function getCheckOut(): ?\DateTimeImmutable
+    public function getCheckOut(): ?DateTimeImmutable
     {
         return $this->checkOut;
     }
 
-    public function setCheckOut(\DateTimeImmutable $checkOut): self
+    public function setCheckOut(DateTimeImmutable $checkOut): self
     {
         $this->checkOut = $checkOut;
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repository;
 
 use App\Entity\Booking;
@@ -11,10 +13,14 @@ use Doctrine\Persistence\ManagerRegistry;
 /**
  * @method Booking|null find($id, $lockMode = null, $lockVersion = null)
  * @method Booking|null findOneBy(array $criteria, array $orderBy = null)
- * @method Booking[]    findAll()
- * @method Booking[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method              findAll()                                                                     array<int, Booking>
+ * @method              findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null) array<array-key, Booking>
+ *
+ * @template T
+ *
+ * @extends ServiceEntityRepository<Booking>
  */
-class BookingRepository extends ServiceEntityRepository
+final class BookingRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {

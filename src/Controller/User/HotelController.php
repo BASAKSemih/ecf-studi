@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Controller\User;
 
-use App\Entity\Hotel;
 use App\Repository\HotelRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,11 +17,12 @@ final class HotelController extends AbstractController
         $hotel = $hotelRepository->findOneById($idHotel);
         if (!$hotel) {
             $this->addFlash('warning', "Cette hotel n'existe pas");
+
             return $this->redirectToRoute('homePage');
         }
 
         return $this->render('user/hotel/show.html.twig', [
-            'hotel' => $hotel
+            'hotel' => $hotel,
         ]);
     }
 }
