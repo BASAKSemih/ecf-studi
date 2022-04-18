@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Repository\BookingRepository;
-use DateTimeImmutable;
+use Symfony\Component\Validator\Constraints as Assert;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: BookingRepository::class)]
@@ -20,11 +21,13 @@ class Booking
     #[ORM\JoinColumn(nullable: false)]
     private User $user;
 
-    #[ORM\Column(type: 'date_immutable')]
-    private DateTimeImmutable $checkIn;
+    #[Assert\GreaterThan('today', message:"La data arrivé doit être supérieur à celle d'aujourd'hui")]
+    #[ORM\Column(type: 'date')]
+    private DateTime $checkIn ;
 
-    #[ORM\Column(type: 'date_immutable')]
-    private DateTimeImmutable $checkOut;
+    #[Assert\GreaterThan(propertyPath:'checkIn', message:"La date de checkOut dois être après la data checkIn")]
+    #[ORM\Column(type: 'date')]
+    private DateTime $checkOut;
 
     #[ORM\ManyToOne(targetEntity: Room::class, inversedBy: 'bookings')]
     #[ORM\JoinColumn(nullable: false)]
@@ -54,24 +57,24 @@ class Booking
         return $this;
     }
 
-    public function getCheckIn(): ?DateTimeImmutable
+    public function getCheckIn(): ?DateTime
     {
         return $this->checkIn;
     }
 
-    public function setCheckIn(DateTimeImmutable $checkIn): self
+    public function setCheckIn(DateTime $checkIn): self
     {
         $this->checkIn = $checkIn;
 
         return $this;
     }
 
-    public function getCheckOut(): ?DateTimeImmutable
+    public function getCheckOut(): ?DateTime
     {
         return $this->checkOut;
     }
 
-    public function setCheckOut(DateTimeImmutable $checkOut): self
+    public function setCheckOut(DateTime $checkOut): self
     {
         $this->checkOut = $checkOut;
 

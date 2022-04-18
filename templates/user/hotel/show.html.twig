@@ -1,6 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {{ hotel.name }}
-
+    <h1>Nos Chambre</h1>
+    <div class="container row">
+        {% for r in rooms %}
+            <div class="col">
+                {% include 'layout/_room_card.html.twig' %}
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}

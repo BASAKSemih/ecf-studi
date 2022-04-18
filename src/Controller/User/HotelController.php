@@ -20,9 +20,11 @@ final class HotelController extends AbstractController
 
             return $this->redirectToRoute('homePage');
         }
+        $rooms = $hotel->getRooms();
 
         return $this->render('user/hotel/show.html.twig', [
             'hotel' => $hotel,
+            'rooms' => $rooms
         ]);
     }
 }

@@ -4,13 +4,13 @@
         <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Page Accueil</a>
+                    <a class="nav-link" href="{{ path('homePage') }}">Page Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Inscription</a>
+                    <a class="nav-link" href="{{ path('security_user_registration') }}">Inscription</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Connexion</a>
+                    <a class="nav-link" href="{{ path('security_user_login') }}">Connexion</a>
                 </li>
             </ul>
         </div>

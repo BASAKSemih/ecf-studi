@@ -62,10 +62,10 @@ final class HotelFixtures extends Fixture
         $hotel2 = new Hotel();
         $hotel2
             ->setManager($manager2)
-            ->setCity('Paris')
-            ->setAddress('Paris address')
-            ->setName('Paris Hotel')
-            ->setDescription('The best Paris hotel');
+            ->setCity('Marseille')
+            ->setAddress('Marseille address')
+            ->setName('Marseille Hotel')
+            ->setDescription('The best Paris hotel 222');
 
         $objectManager->persist($hotel2);
         $objectManager->flush();
@@ -74,11 +74,23 @@ final class HotelFixtures extends Fixture
         $room2
             ->setHotel($hotel2)
             ->setName('Best Room in Mulhouse')
-            ->setDescription('description room mulhouse')
+            ->setDescription('description room mulhouse 2')
             ->setPrice(1000)
             ->setMainPicture('path picture Mulhouse');
 
         $objectManager->persist($room2);
+        $objectManager->flush();
+
+        for ($r =0; $r<5; $r++){
+            $room = new Room();
+            $room
+                ->setHotel($hotel)
+                ->setName('Best Room')
+                ->setDescription('description room')
+                ->setPrice(1000)
+                ->setMainPicture('path picture');
+            $objectManager->persist($room);
+        }
         $objectManager->flush();
     }
 }

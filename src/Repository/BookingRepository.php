@@ -27,56 +27,20 @@ final class BookingRepository extends ServiceEntityRepository
         parent::__construct($registry, Booking::class);
     }
 
-    /**
-     * @throws ORMException
-     * @throws OptimisticLockException
-     */
-    public function add(Booking $entity, bool $flush = true): void
+    public function findAvailableRooms($checkIn, $checkOut, $room)
     {
-        $this->_em->persist($entity);
-        if ($flush) {
-            $this->_em->flush();
-        }
-    }
-
-    /**
-     * @throws ORMException
-     * @throws OptimisticLockException
-     */
-    public function remove(Booking $entity, bool $flush = true): void
-    {
-        $this->_em->remove($entity);
-        if ($flush) {
-            $this->_em->flush();
-        }
-    }
-
-    // /**
-    //  * @return Booking[] Returns an array of Booking objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('b')
-            ->andWhere('b.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('b.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
+        $qb = $this->getEntityManager()->createQueryBuilder()
+            ->select('b')
+            ->from(Booking::class, 'b')
+            ->andWhere('b.checkIn BETWEEN :checkIn AND :checkOut OR b.checkOut BETWEEN :checkIn AND :checkOut OR :checkIn BETWEEN b.checkIn AND b.checkOut')
+            ->andWhere('b.room = :roomId')
+            ->setParameter('checkIn', $checkIn)
+            ->setParameter('checkOut', $checkOut)
+            ->setParameter('roomId', $room)
         ;
-    }
-    */
+        $result = $qb->getQuery()->getResult();
 
-    /*
-    public function findOneBySomeField($value): ?Booking
-    {
-        return $this->createQueryBuilder('b')
-            ->andWhere('b.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return $result;
     }
-    */
 }
+

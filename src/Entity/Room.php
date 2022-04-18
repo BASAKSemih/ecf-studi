@@ -44,6 +44,11 @@ class Room
     #[ORM\OneToMany(mappedBy: 'room', targetEntity: Booking::class)]
     private Collection $bookings;
 
+    public function __toString(): string
+    {
+        return $this->name;
+    }
+
     public function __construct()
     {
         $this->bookings = new ArrayCollection();

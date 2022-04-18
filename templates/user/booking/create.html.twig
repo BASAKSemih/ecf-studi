@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="h3 mb-3 font-weight-normal mt-5 pt-5">Réserver à l'hotel {{ hotel.name }}, {{ room.name }}</h1>
+        {{ form_start(form) }}
+        <label for="">Check in</label>
+        {{ form_row(form.checkIn) }}
+        <label for="">Check Out</label>
+        {{ form_row(form.checkOut) }}
+
+        {{ form_widget(form.submit, {'label': 'Valider la réservation'}) }}
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
