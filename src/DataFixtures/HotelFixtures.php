@@ -81,7 +81,7 @@ final class HotelFixtures extends Fixture
         $objectManager->persist($room2);
         $objectManager->flush();
 
-        for ($r =0; $r<5; $r++){
+        for ($r = 0; $r < 5; ++$r) {
             $room = new Room();
             $room
                 ->setHotel($hotel)

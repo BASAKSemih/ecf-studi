@@ -6,8 +6,6 @@ namespace App\Repository;
 
 use App\Entity\Booking;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -43,4 +41,3 @@ final class BookingRepository extends ServiceEntityRepository
         return $result;
     }
 }
-

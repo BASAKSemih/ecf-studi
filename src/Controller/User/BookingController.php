@@ -10,7 +10,6 @@ use App\Form\BookingType;
 use App\Repository\BookingRepository;
 use App\Repository\HotelRepository;
 use App\Repository\RoomRepository;
-use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -45,7 +44,7 @@ final class BookingController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();
         if ($room->getHotel() !== $hotel) {
-            $this->addFlash('warning', "Erreur");
+            $this->addFlash('warning', 'Erreur');
 
             return $this->redirectToRoute('homePage');
         }
@@ -58,22 +57,23 @@ final class BookingController extends AbstractController
 
             $checkAvailability = $this->bookingRepository->findAvailableRooms($booking->getCheckIn(), $booking->getCheckOut(), $booking->getRoom()->getId());
             if ($checkAvailability) {
-                $this->addFlash('warning', "Cette chambre est déjà réserver a ses dates");
+                $this->addFlash('warning', 'Cette chambre est déjà réserver a ses dates');
+
                 return $this->render('user/booking/create.html.twig', [
                     'room' => $room,
                     'hotel' => $hotel,
-                    'form' => $form->createView()
+                    'form' => $form->createView(),
                 ]);
             }
             $this->entityManager->persist($booking);
             $this->entityManager->flush();
-            $this->addFlash('success', "Vous avez bien réserver");
+            $this->addFlash('success', 'Vous avez bien réserver');
         }
+
         return $this->render('user/booking/create.html.twig', [
             'room' => $room,
             'hotel' => $hotel,
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
-
 }

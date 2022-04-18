@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Repository\BookingRepository;
-use Symfony\Component\Validator\Constraints as Assert;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: BookingRepository::class)]
 class Booking
@@ -21,11 +21,11 @@ class Booking
     #[ORM\JoinColumn(nullable: false)]
     private User $user;
 
-    #[Assert\GreaterThan('today', message:"La data arrivé doit être supérieur à celle d'aujourd'hui")]
+    #[Assert\GreaterThan('today', message: "La data arrivé doit être supérieur à celle d'aujourd'hui")]
     #[ORM\Column(type: 'date')]
-    private DateTime $checkIn ;
+    private DateTime $checkIn;
 
-    #[Assert\GreaterThan(propertyPath:'checkIn', message:"La date de checkOut dois être après la data checkIn")]
+    #[Assert\GreaterThan(propertyPath: 'checkIn', message: 'La date de checkOut dois être après la data checkIn')]
     #[ORM\Column(type: 'date')]
     private DateTime $checkOut;
 

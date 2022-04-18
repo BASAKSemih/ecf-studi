@@ -24,7 +24,7 @@ final class HotelController extends AbstractController
 
         return $this->render('user/hotel/show.html.twig', [
             'hotel' => $hotel,
-            'rooms' => $rooms
+            'rooms' => $rooms,
         ]);
     }
 }
