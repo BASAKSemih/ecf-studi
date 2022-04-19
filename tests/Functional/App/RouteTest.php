@@ -40,7 +40,7 @@ final class RouteTest extends WebTestCase
         /** @var RouterInterface $router */
         $router = $client->getContainer()->get('router');
         $crawler = $client->request(Request::METHOD_GET, $router->generate('user_show_hotel', [
-            'idHotel' => 99999,
+            'idHotel' => 123123921,
         ]));
         $client->followRedirect();
         self::assertRouteSame('homePage');
