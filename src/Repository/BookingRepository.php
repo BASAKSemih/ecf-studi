@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Entity\Booking;
-use App\Entity\Room;
 use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -38,6 +37,7 @@ final class BookingRepository extends ServiceEntityRepository
             ->setParameter('checkOut', $checkOut)
             ->setParameter('roomId', $idRoom)
         ;
+
         return $qb->getQuery()->getResult();
     }
 }

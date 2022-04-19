@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Entity\Admin;
+use App\Entity\Contact;
 use App\Entity\Hotel;
 use App\Entity\Manager;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -25,7 +26,7 @@ final class AdminDashBoardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Ecf');
+            ->setTitle('Admin Hotel');
     }
 
     public function configureMenuItems(): iterable
@@ -34,5 +35,6 @@ final class AdminDashBoardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Crée un Admin', 'fas fa-list', Admin::class);
         yield MenuItem::linkToCrud('Crée un Manager', 'fas fa-list', Manager::class);
         yield MenuItem::linkToCrud('Crée un Hotel', 'fas fa-list', Hotel::class);
+        yield MenuItem::linkToCrud('Les Messages', 'fas fa-list', Contact::class);
     }
 }

@@ -38,7 +38,7 @@ final class BookingController extends AbstractController
 
             return $this->redirectToRoute('homePage');
         }
-        /** @phpstan-ignore-next-line  */
+        /* @phpstan-ignore-next-line  */
         if (!$room) {
             $this->addFlash('warning', "Cette chambre n'existe pas");
 
@@ -87,7 +87,7 @@ final class BookingController extends AbstractController
         $bookings = $this->bookingRepository->findByUser($user);
 
         return $this->render('user/booking/showAll.html.twig', [
-            'bookings' => $bookings
+            'bookings' => $bookings,
         ]);
     }
 }
