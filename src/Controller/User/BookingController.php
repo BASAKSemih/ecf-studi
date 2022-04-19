@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller\User;
 
 use App\Entity\Booking;
+use App\Entity\Room;
 use App\Entity\User;
 use App\Form\BookingType;
 use App\Repository\BookingRepository;
@@ -30,12 +31,14 @@ final class BookingController extends AbstractController
     public function createBooking(int $idHotel, int $idRoom, Request $request): Response
     {
         $hotel = $this->hotelRepository->findOneById($idHotel);
+        /** @var Room $room */
         $room = $this->roomRepository->findOneById($idRoom);
         if (!$hotel) {
             $this->addFlash('warning', "Cette hotel n'existe pas");
 
             return $this->redirectToRoute('homePage');
         }
+        /** @phpstan-ignore-next-line  */
         if (!$room) {
             $this->addFlash('warning', "Cette chambre n'existe pas");
 
@@ -55,7 +58,7 @@ final class BookingController extends AbstractController
             $booking->setUser($user);
             $booking->setRoom($room);
 
-            $checkAvailability = $this->bookingRepository->findAvailableRooms($booking->getCheckIn(), $booking->getCheckOut(), $booking->getRoom()->getId());
+            $checkAvailability = $this->bookingRepository->findAvailableRooms($booking->getCheckIn(), $booking->getCheckOut(), $idRoom);
             if ($checkAvailability) {
                 $this->addFlash('warning', 'Cette chambre est déjà réserver a ses dates');
 

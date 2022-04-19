@@ -57,7 +57,7 @@ class Booking
         return $this;
     }
 
-    public function getCheckIn(): ?DateTime
+    public function getCheckIn(): DateTime
     {
         return $this->checkIn;
     }
@@ -69,7 +69,7 @@ class Booking
         return $this;
     }
 
-    public function getCheckOut(): ?DateTime
+    public function getCheckOut(): DateTime
     {
         return $this->checkOut;
     }

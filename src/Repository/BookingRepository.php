@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Entity\Booking;
+use App\Entity\Room;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -25,7 +27,7 @@ final class BookingRepository extends ServiceEntityRepository
         parent::__construct($registry, Booking::class);
     }
 
-    public function findAvailableRooms($checkIn, $checkOut, $room)
+    public function findAvailableRooms(DateTime $checkIn, DateTime $checkOut, int $idRoom): mixed
     {
         $qb = $this->getEntityManager()->createQueryBuilder()
             ->select('b')
@@ -34,10 +36,8 @@ final class BookingRepository extends ServiceEntityRepository
             ->andWhere('b.room = :roomId')
             ->setParameter('checkIn', $checkIn)
             ->setParameter('checkOut', $checkOut)
-            ->setParameter('roomId', $room)
+            ->setParameter('roomId', $idRoom)
         ;
-        $result = $qb->getQuery()->getResult();
-
-        return $result;
+        return $qb->getQuery()->getResult();
     }
 }
