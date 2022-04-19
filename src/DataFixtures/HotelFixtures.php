@@ -81,11 +81,22 @@ final class HotelFixtures extends Fixture
         $objectManager->persist($room2);
         $objectManager->flush();
 
+        $room2 = new Room();
+        $room2
+            ->setHotel($hotel2)
+            ->setName('Best Room in testtt')
+            ->setDescription('description room mulhouse 2')
+            ->setPrice(1000)
+            ->setMainPicture('path picture Mulhouse');
+
+        $objectManager->persist($room2);
+        $objectManager->flush();
+
         for ($r = 0; $r < 5; ++$r) {
             $room = new Room();
             $room
                 ->setHotel($hotel)
-                ->setName('Best Room')
+                ->setName('Best Room qdsqdqqd')
                 ->setDescription('description room')
                 ->setPrice(1000)
                 ->setMainPicture('path picture');

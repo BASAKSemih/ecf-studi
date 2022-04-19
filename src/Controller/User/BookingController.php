@@ -36,7 +36,7 @@ final class BookingController extends AbstractController
         if (!$hotel) {
             $this->addFlash('warning', "Cette hotel n'existe pas");
 
-            return $this->redirectToRoute('homePage');
+            return $this->redirectToRoute('user_homePage');
         }
         /* @phpstan-ignore-next-line  */
         if (!$room) {
@@ -49,7 +49,7 @@ final class BookingController extends AbstractController
         if ($room->getHotel() !== $hotel) {
             $this->addFlash('warning', 'Erreur');
 
-            return $this->redirectToRoute('homePage');
+            return $this->redirectToRoute('user_homePage');
         }
         $booking = new Booking();
         $form = $this->createForm(BookingType::class, $booking)->handleRequest($request);
@@ -71,6 +71,7 @@ final class BookingController extends AbstractController
             $this->entityManager->persist($booking);
             $this->entityManager->flush();
             $this->addFlash('success', 'Vous avez bien réserver');
+            return $this->redirectToRoute('user_show_all_booking');
         }
 
         return $this->render('user/booking/create.html.twig', [
