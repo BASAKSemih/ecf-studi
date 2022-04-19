@@ -50,10 +50,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Booking::class)]
     private Collection $bookings;
 
+    /**
+     * @var Collection<Contact>
+     */
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Contact::class)]
+    private Collection $contacts;
+
     public function __construct()
     {
         $this->createdAt = new DateTimeImmutable();
         $this->bookings = new ArrayCollection();
+        $this->contacts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -223,4 +230,34 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 //
 //        return $this;
 //    }
+
+/**
+ * @return Collection<int, Contact>
+ */
+public function getContacts(): Collection
+{
+    return $this->contacts;
+}
+
+public function addContact(Contact $contact): self
+{
+    if (!$this->contacts->contains($contact)) {
+        $this->contacts[] = $contact;
+        $contact->setUser($this);
+    }
+
+    return $this;
+}
+
+public function removeContact(Contact $contact): self
+{
+    if ($this->contacts->removeElement($contact)) {
+        // set the owning side to null (unless already changed)
+        if ($contact->getUser() === $this) {
+            $contact->setUser(null);
+        }
+    }
+
+    return $this;
+}
 }
