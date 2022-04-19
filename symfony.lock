@@ -152,6 +152,15 @@
     "gedmo/doctrine-extensions": {
         "version": "v3.5.0"
     },
+    "guzzlehttp/guzzle": {
+        "version": "7.4.2"
+    },
+    "guzzlehttp/promises": {
+        "version": "1.5.1"
+    },
+    "guzzlehttp/psr7": {
+        "version": "2.2.1"
+    },
     "justinrainbow/json-schema": {
         "version": "5.2.11"
     },
@@ -169,6 +178,9 @@
     },
     "nikic/php-parser": {
         "version": "v4.13.2"
+    },
+    "nunomaduro/patrol": {
+        "version": "v1.1.0"
     },
     "nunomaduro/phpinsights": {
         "version": "v2.1.0"
@@ -259,6 +271,15 @@
     "psr/event-dispatcher": {
         "version": "1.0.0"
     },
+    "psr/http-client": {
+        "version": "1.0.1"
+    },
+    "psr/http-factory": {
+        "version": "1.0.1"
+    },
+    "psr/http-message": {
+        "version": "1.0.1"
+    },
     "psr/link": {
         "version": "1.1.1"
     },
@@ -267,6 +288,9 @@
     },
     "psr/simple-cache": {
         "version": "1.0.1"
+    },
+    "ralouphie/getallheaders": {
+        "version": "3.0.3"
     },
     "react/promise": {
         "version": "v2.9.0"

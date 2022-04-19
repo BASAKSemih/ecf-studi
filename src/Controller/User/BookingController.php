@@ -76,4 +76,15 @@ final class BookingController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    #[Route('/espace-utilisateur/mes-reservation', name: 'user_show_all_booking')]
+    public function viewAllBooking(): Response
+    {
+        $user = $this->getUser();
+        $bookings = $this->bookingRepository->findByUser($user);
+
+        return $this->render('user/booking/showAll.html.twig', [
+            'bookings' => $bookings
+        ]);
+    }
 }
