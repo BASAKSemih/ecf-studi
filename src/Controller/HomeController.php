@@ -27,7 +27,7 @@ final class HomeController extends AbstractController
     }
 
     #[Route('/contacter-le-groupe-hotelier', name: 'visitor_contact')]
-    public function createContact(Request $request, EntityManagerInterface $entityManager)
+    public function createContact(Request $request, EntityManagerInterface $entityManager) : Response
     {
         $contact = new Contact();
         $form = $this->createForm(ContactType::class, $contact)->handleRequest($request);
