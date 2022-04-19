@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="h3 mb-3 font-weight-normal mt-5 pt-5">Contactée le groupe hôtelier</h1>
+        {{ form_start(form) }}
+        <label for="">Votre email</label>
+        {{ form_row(form.email) }}
+        <label for="">Sujet</label>
+        {{ form_row(form.topic) }}
+        <label for="">Question</label>
+        {{ form_row(form.context) }}
+
+        {{ form_widget(form.submit, {'label': 'Envoyer le message'}) }}
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
