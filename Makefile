@@ -49,3 +49,7 @@ analyse:
 test:
 	composer prepare-test
 	vendor/bin/phpunit --coverage-html html
+
+database:
+	composer database-fixtures
+

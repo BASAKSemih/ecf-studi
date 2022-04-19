@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+     <h3>Mes Réservations</h3>
+        {% for booking in bookings %}
+        <div class="h-50 p-5 bg-light border rounded-3 row">
+            <div class="col">
+                <h5>ID Réservation: {{ booking.id }}</h5>
+            </div>
+            <div class="col-5">
+                Hotel : {{ booking.hotel.name }}
+                Chambre : {{ booking.room.name }}
+                <small class="text-muted">{{ booking.hotel.address }} {{ booking.hotel.city }}</small>
+            </div>
+            <div class="col">
+                Date de départ : {{ booking.checkOut.format('d/m/yy') }}
+            </div>
+            <div class="col">
+                Date de départ : {{ booking.checkOut.format('d/m/yy') }}
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

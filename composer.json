@@ -95,6 +95,10 @@
             "php bin/console d:s:u -f --env=test",
             "php bin/console d:f:l -n --env=test"
         ],
+        "database-fixtures": [
+            "php bin/console d:s:u -f --env=dev",
+            "php bin/console d:f:l -n --env=dev"
+        ],
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
@@ -116,6 +120,7 @@
         }
     },
     "require-dev": {
+        "nunomaduro/patrol": "^1.1",
         "phpunit/phpunit": "^9.5",
         "symfony/browser-kit": "5.4.*",
         "symfony/css-selector": "5.4.*",

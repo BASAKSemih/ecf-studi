@@ -15,8 +15,9 @@ final class HomeController extends AbstractController
     public function home(HotelRepository $hotelRepository): Response
     {
         $hotels = $hotelRepository->findAll();
+
         return $this->render('home/home.html.twig', [
-            'hotels' => $hotels
+            'hotels' => $hotels,
         ]);
     }
 }
