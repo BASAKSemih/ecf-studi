@@ -34,12 +34,14 @@ final class HomeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var User $user */
             $user = $this->getUser();
-            $contact->setUser();
+            $contact->setUser($user);
             $entityManager->persist($contact);
             $entityManager->flush();
-            $this->addFlash('success', "Le message à bien été envoyer vous recevrez une réponse rapidement");
+            $this->addFlash('success', 'Le message à bien été envoyer vous recevrez une réponse rapidement');
+
             return $this->redirectToRoute('user_homePage');
         }
+
         return $this->render('home/contact.html.twig', [
             'form' => $form->createView(),
         ]);

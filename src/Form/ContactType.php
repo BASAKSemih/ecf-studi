@@ -23,7 +23,7 @@ class ContactType extends AbstractType
                     'Je souhaite poser une réclamation' => 'Je souhaite poser une réclamation',
                     'Je souhaite commander un service supplémentaire' => 'Je souhaite commander un service supplémentaire',
                     'Je souhaite en savoir plus sur une suite' => 'Je souhaite commander un service supplémentaire',
-                    "J'ai un souci avec cette application" => "J'ai un souci avec cette application"
+                    "J'ai un souci avec cette application" => "J'ai un souci avec cette application",
                 ],
                 'attr' => [
                     'class' => 'form-control',

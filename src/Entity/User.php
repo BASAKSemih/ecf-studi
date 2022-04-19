@@ -231,33 +231,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 //        return $this;
 //    }
 
-/**
- * @return Collection<int, Contact>
- */
-public function getContacts(): Collection
-{
-    return $this->contacts;
-}
-
-public function addContact(Contact $contact): self
-{
-    if (!$this->contacts->contains($contact)) {
-        $this->contacts[] = $contact;
-        $contact->setUser($this);
+    /**
+     * @return Collection<int, Contact>
+     */
+    public function getContacts(): Collection
+    {
+        return $this->contacts;
     }
 
-    return $this;
-}
-
-public function removeContact(Contact $contact): self
-{
-    if ($this->contacts->removeElement($contact)) {
-        // set the owning side to null (unless already changed)
-        if ($contact->getUser() === $this) {
-            $contact->setUser(null);
+    public function addContact(Contact $contact): self
+    {
+        if (!$this->contacts->contains($contact)) {
+            $this->contacts[] = $contact;
+            $contact->setUser($this);
         }
+
+        return $this;
     }
 
-    return $this;
-}
+    public function removeContact(Contact $contact): self
+    {
+        if ($this->contacts->removeElement($contact)) {
+            // set the owning side to null (unless already changed)
+            if ($contact->getUser() === $this) {
+                $contact->setUser(null);
+            }
+        }
+
+        return $this;
+    }
 }
