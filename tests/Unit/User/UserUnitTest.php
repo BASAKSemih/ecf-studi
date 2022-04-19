@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 class UserUnitTest extends TestCase
 {
-    public function testuserAssertSame(): void
+    public function testUserAssertSame(): void
     {
         $user = new User();
         $dateTime = new DateTimeImmutable();

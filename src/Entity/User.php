@@ -203,12 +203,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @return Collection<int, Booking>
+     * @codeCoverageIgnore
      */
     public function getBookings(): Collection
     {
         return $this->bookings;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function addBooking(Booking $booking): self
     {
         if (!$this->bookings->contains($booking)) {
@@ -233,12 +237,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @return Collection<int, Contact>
+     * @codeCoverageIgnore
      */
     public function getContacts(): Collection
     {
         return $this->contacts;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function addContact(Contact $contact): self
     {
         if (!$this->contacts->contains($contact)) {
@@ -249,6 +257,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function removeContact(Contact $contact): self
     {
         if ($this->contacts->removeElement($contact)) {

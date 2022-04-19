@@ -44,6 +44,9 @@ class Room
     #[ORM\OneToMany(mappedBy: 'room', targetEntity: Booking::class)]
     private Collection $bookings;
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function __toString(): string
     {
         return $this->name;
@@ -133,12 +136,16 @@ class Room
 
     /**
      * @return Collection<int, Booking>
+     * @codeCoverageIgnore
      */
     public function getBookings(): Collection
     {
         return $this->bookings;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function addBooking(Booking $booking): self
     {
         if (!$this->bookings->contains($booking)) {
