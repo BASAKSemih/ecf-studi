@@ -61,6 +61,9 @@ class Hotel
         $this->bookings = new ArrayCollection();
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function __toString(): string
     {
         return $this->name;
@@ -175,12 +178,16 @@ class Hotel
 
     /**
      * @return Collection<int, Booking>
+     * @codeCoverageIgnore
      */
     public function getBookings(): Collection
     {
         return $this->bookings;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function addBooking(Booking $booking): self
     {
         if (!$this->bookings->contains($booking)) {

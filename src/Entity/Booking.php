@@ -37,14 +37,14 @@ class Booking
     #[ORM\JoinColumn(nullable: false)]
     private Hotel $hotel;
 
-    #[ORM\Column(type: 'boolean')]
-    private bool $isValid = true;
-
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function getUser(): ?User
     {
         return $this->user;
@@ -101,18 +101,6 @@ class Booking
     public function setHotel(Hotel $hotel): self
     {
         $this->hotel = $hotel;
-
-        return $this;
-    }
-
-    public function getIsValid(): ?bool
-    {
-        return $this->isValid;
-    }
-
-    public function setIsValid(bool $isValid): self
-    {
-        $this->isValid = $isValid;
 
         return $this;
     }
