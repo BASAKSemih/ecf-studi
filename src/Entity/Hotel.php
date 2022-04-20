@@ -213,15 +213,18 @@ class Hotel
 //        return $this;
 //    }
 
-public function getPicture(): ?string
-{
-    return $this->picture;
-}
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
 
-public function setPicture(string $picture): self
-{
-    $this->picture = $picture;
+    /**
+     * @codeCoverageIgnore
+     */
+    public function setPicture(string $picture): self
+    {
+        $this->picture = $picture;
 
-    return $this;
-}
+        return $this;
+    }
 }

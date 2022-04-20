@@ -3,7 +3,6 @@
 namespace App\Tests\Functional\User;
 
 use App\Entity\Hotel;
-use App\Entity\Manager;
 use App\Entity\Room;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,16 +28,15 @@ class BookingTest extends WebTestCase
         $entityManager = $client->getContainer()->get('doctrine.orm.entity_manager');
         $hotelRepository = $entityManager->getRepository(Hotel::class);
         /** @var Hotel $hotel */
-        $hotel = $hotelRepository->findOneByName("Paris Hotel");
+        $hotel = $hotelRepository->findOneByName('Paris Hotel');
 
         $roomRepository = $entityManager->getRepository(Room::class);
         /** @var Room $room */
         $room = $roomRepository->findOneByName('Best Room');
 
-
         $crawler = $client->request(Request::METHOD_GET, $router->generate('user_booking', [
             'idHotel' => $hotel->getId(),
-            'idRoom' => $room->getId()
+            'idRoom' => $room->getId(),
         ]));
         $form = $crawler->filter('form[name=booking]')->form([
             'booking[checkIn][day]' => 10,
@@ -47,7 +45,6 @@ class BookingTest extends WebTestCase
             'booking[checkOut][day]' => 10,
             'booking[checkOut][month]' => 10,
             'booking[checkOut][year]' => 2025,
-
         ]);
         $client->submit($form);
         $client->followRedirect();
@@ -71,7 +68,7 @@ class BookingTest extends WebTestCase
 
         $crawler = $client->request(Request::METHOD_GET, $router->generate('user_booking', [
             'idHotel' => 13131313131,
-            'idRoom' => 13131313131313
+            'idRoom' => 13131313131313,
         ]));
         $client->followRedirect();
         self::assertRouteSame('user_homePage');
@@ -92,17 +89,15 @@ class BookingTest extends WebTestCase
         $client->followRedirect();
         self::assertRouteSame('user_homePage');
 
-
         $entityManager = $client->getContainer()->get('doctrine.orm.entity_manager');
         $hotelRepository = $entityManager->getRepository(Hotel::class);
         /** @var Hotel $hotel */
-        $hotel = $hotelRepository->findOneByName("Paris Hotel");
+        $hotel = $hotelRepository->findOneByName('Paris Hotel');
 
         $crawler = $client->request(Request::METHOD_GET, $router->generate('user_booking', [
             'idHotel' => $hotel->getId(),
-            'idRoom' => 22713
+            'idRoom' => 22713,
         ]));
-
     }
 
     public function testUserBookingWithRoomNotToHotel(): void
@@ -123,16 +118,15 @@ class BookingTest extends WebTestCase
         $entityManager = $client->getContainer()->get('doctrine.orm.entity_manager');
         $hotelRepository = $entityManager->getRepository(Hotel::class);
         /** @var Hotel $hotel */
-        $hotel = $hotelRepository->findOneByName("Paris Hotel");
+        $hotel = $hotelRepository->findOneByName('Paris Hotel');
 
         $roomRepository = $entityManager->getRepository(Room::class);
         /** @var Room $room */
         $room = $roomRepository->findOneByName('Best Room in testtt');
 
-
         $crawler = $client->request(Request::METHOD_GET, $router->generate('user_booking', [
             'idHotel' => $hotel->getId(),
-            'idRoom' => $room->getId()
+            'idRoom' => $room->getId(),
         ]));
 
         $client->followRedirect();
@@ -157,16 +151,15 @@ class BookingTest extends WebTestCase
         $entityManager = $client->getContainer()->get('doctrine.orm.entity_manager');
         $hotelRepository = $entityManager->getRepository(Hotel::class);
         /** @var Hotel $hotel */
-        $hotel = $hotelRepository->findOneByName("Paris Hotel");
+        $hotel = $hotelRepository->findOneByName('Paris Hotel');
 
         $roomRepository = $entityManager->getRepository(Room::class);
         /** @var Room $room */
         $room = $roomRepository->findOneByName('Best Room');
 
-
         $crawler = $client->request(Request::METHOD_GET, $router->generate('user_booking', [
             'idHotel' => $hotel->getId(),
-            'idRoom' => $room->getId()
+            'idRoom' => $room->getId(),
         ]));
         $form = $crawler->filter('form[name=booking]')->form([
             'booking[checkIn][day]' => 10,
@@ -175,7 +168,6 @@ class BookingTest extends WebTestCase
             'booking[checkOut][day]' => 10,
             'booking[checkOut][month]' => 10,
             'booking[checkOut][year]' => 2025,
-
         ]);
         $client->submit($form);
         self::assertRouteSame('user_booking');
