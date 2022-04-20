@@ -46,7 +46,7 @@ final class HotelFixtures extends Fixture
             ->setName('Best Room')
             ->setDescription('description room')
             ->setPrice(1000)
-            ->setMainPicture('path picture');
+            ->setMainPicture('qsdqsdqsd.jpeg');
 
         $objectManager->persist($room);
         $objectManager->flush();
@@ -78,7 +78,7 @@ final class HotelFixtures extends Fixture
             ->setName('Best Room in Mulhouse')
             ->setDescription('description room mulhouse 2')
             ->setPrice(1000)
-            ->setMainPicture('path picture Mulhouse');
+            ->setMainPicture('qsdqsdqsd.jpeg');
 
         $objectManager->persist($room2);
         $objectManager->flush();
@@ -89,7 +89,7 @@ final class HotelFixtures extends Fixture
             ->setName('Best Room in testtt')
             ->setDescription('description room mulhouse 2')
             ->setPrice(1000)
-            ->setMainPicture('path picture Mulhouse');
+            ->setMainPicture('qsdqsdqsd.jpeg');
 
         $objectManager->persist($room2);
         $objectManager->flush();
@@ -101,7 +101,7 @@ final class HotelFixtures extends Fixture
                 ->setName('Best Room qdsqdqqd')
                 ->setDescription('description room')
                 ->setPrice(1000)
-                ->setMainPicture('path picture');
+                ->setMainPicture('qsdqsdqsd.jpeg');
             $objectManager->persist($room);
         }
         $objectManager->flush();
