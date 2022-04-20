@@ -16,7 +16,7 @@
                 <div class="card mt-2">
                     <img src="/uploads/{{ r.mainPicture }}">
                     <div class="card-body">
-                        <h4 class="card-title">{{ r.name }} ( {{ (r.price/100) }} ) €</h4>
+                        <h4 class="card-title">{{ r.name }} ( {{ (r.price / 100) }} ) €</h4>
                         <span class="badge badge-info text-black">{{ r.hotel.name }}</span>
                         <p class="card-text">'faire la description'</p>
                         <a href="{{ path('user_booking', {'idHotel': r.hotel.id, 'idRoom': r.id}) }}" class="btn btn-success btn-sm">Réserver </a>
