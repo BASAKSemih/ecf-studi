@@ -71,6 +71,7 @@ final class BookingController extends AbstractController
             $this->entityManager->persist($booking);
             $this->entityManager->flush();
             $this->addFlash('success', 'Vous avez bien réserver');
+
             return $this->redirectToRoute('user_show_all_booking');
         }
 

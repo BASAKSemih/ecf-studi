@@ -32,6 +32,7 @@ final class HotelFixtures extends Fixture
         $hotel
             ->setManager($manager)
             ->setCity('Paris')
+            ->setPicture('55bc3acfee8fbd01ad61bf4050b350a2dd875c0f.jpg')
             ->setAddress('Paris address')
             ->setName('Paris Hotel')
             ->setDescription('The best Paris hotel');
@@ -45,7 +46,7 @@ final class HotelFixtures extends Fixture
             ->setName('Best Room')
             ->setDescription('description room')
             ->setPrice(1000)
-            ->setMainPicture('path picture');
+            ->setMainPicture('qsdqsdqsd.jpeg');
 
         $objectManager->persist($room);
         $objectManager->flush();
@@ -63,6 +64,7 @@ final class HotelFixtures extends Fixture
         $hotel2
             ->setManager($manager2)
             ->setCity('Marseille')
+            ->setPicture('55bc3acfee8fbd01ad61bf4050b350a2dd875c0f.jpg')
             ->setAddress('Marseille address')
             ->setName('Marseille Hotel')
             ->setDescription('The best Paris hotel 222');
@@ -76,7 +78,7 @@ final class HotelFixtures extends Fixture
             ->setName('Best Room in Mulhouse')
             ->setDescription('description room mulhouse 2')
             ->setPrice(1000)
-            ->setMainPicture('path picture Mulhouse');
+            ->setMainPicture('qsdqsdqsd.jpeg');
 
         $objectManager->persist($room2);
         $objectManager->flush();
@@ -87,7 +89,7 @@ final class HotelFixtures extends Fixture
             ->setName('Best Room in testtt')
             ->setDescription('description room mulhouse 2')
             ->setPrice(1000)
-            ->setMainPicture('path picture Mulhouse');
+            ->setMainPicture('qsdqsdqsd.jpeg');
 
         $objectManager->persist($room2);
         $objectManager->flush();
@@ -99,7 +101,7 @@ final class HotelFixtures extends Fixture
                 ->setName('Best Room qdsqdqqd')
                 ->setDescription('description room')
                 ->setPrice(1000)
-                ->setMainPicture('path picture');
+                ->setMainPicture('qsdqsdqsd.jpeg');
             $objectManager->persist($room);
         }
         $objectManager->flush();

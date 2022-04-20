@@ -22,5 +22,4 @@ class ContactUnitTest extends TestCase
         $this->assertNull($contact->getId());
         $this->assertNull($contact->getUser());
     }
-
 }

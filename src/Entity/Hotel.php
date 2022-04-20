@@ -54,6 +54,9 @@ class Hotel
     #[ORM\OneToMany(mappedBy: 'hotel', targetEntity: Booking::class)]
     private Collection $bookings;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $picture = null;
+
     public function __construct()
     {
         $this->createdAt = new DateTimeImmutable();
@@ -209,4 +212,19 @@ class Hotel
 //
 //        return $this;
 //    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
+    public function setPicture(string $picture): self
+    {
+        $this->picture = $picture;
+
+        return $this;
+    }
 }

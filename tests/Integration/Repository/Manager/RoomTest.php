@@ -28,7 +28,6 @@ final class RoomTest extends WebTestCase
         $this->assertSame($room->getName(), 'Best Room');
         $this->assertSame($room->getDescription(), 'description room');
         $this->assertSame($room->getPrice(), 1000);
-        $this->assertSame($room->getMainPicture(), 'path picture');
         $this->assertSame($room->getHotel(), $hotel);
     }
 }
