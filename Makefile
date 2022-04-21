@@ -45,3 +45,11 @@ analyse:
 	make phpmd
 	make insights
 	make phpstan
+
+test:
+	composer prepare-test
+	vendor/bin/phpunit --coverage-html html
+
+database:
+	composer database-fixtures
+

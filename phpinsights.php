@@ -65,6 +65,8 @@ return [
         'phpinsights.php',
         'src/Kernel.php',
         'migrations',
+        'src/Security/',
+        'src/Controller/Admin/',
     ],
 
     'add' => [
