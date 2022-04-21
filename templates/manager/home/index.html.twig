@@ -20,8 +20,8 @@
                         <h4 class="card-title">{{ r.name }} ( {{ (r.price / 100) }} ) €</h4>
                         <span class="badge badge-info text-black">{{ r.hotel.name }}</span>
                         <p class="card-text">{{ r.description }}</p>
-                        <a href="{{ path('manager_room_edit', {'idHotel': hotel.id, 'idRoom': r.id }) }}" type="button" class="btn btn-sm btn-info">Modifier la suite</a>
-                        <a href="{{ path('manager_room_delete', {'idHotel': hotel.id, 'idRoom': r.id }) }}" type="button" class="btn btn-sm btn-danger">Supprimer la suite</a>
+                        <a href="{{ path('manager_room_edit', {'idHotel': hotel.id, 'idRoom': r.id}) }}" type="button" class="btn btn-sm btn-info">Modifier la suite</a>
+                        <a href="{{ path('manager_room_delete', {'idHotel': hotel.id, 'idRoom': r.id}) }}" type="button" class="btn btn-sm btn-danger">Supprimer la suite</a>
                     </div>
                 </div>
             </div>
