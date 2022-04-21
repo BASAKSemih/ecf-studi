@@ -31,7 +31,6 @@ class BookingJSType extends AbstractType
                 'attr' => [
                     'class' => 'form-control',
                 ],
-
             ])
             ->add('room', ChoiceType::class, [
                 'placeholder' => 'Chambre (Choisir un hotel)',
@@ -77,7 +76,7 @@ class BookingJSType extends AbstractType
                 'attr' => [
                     'class' => 'form-control',
                 ],
-                'label' => false
+                'label' => false,
             ]);
         };
 

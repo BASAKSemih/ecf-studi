@@ -84,6 +84,9 @@ final class BookingController extends AbstractController
         ]);
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     #[Route('/espace-utilisateur/reserver-une-suites', name: 'user_booking_js')]
     public function createBookingDynamic(Request $request): Response
     {
@@ -103,7 +106,7 @@ final class BookingController extends AbstractController
         }
 
         return $this->render('home/booking.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 
