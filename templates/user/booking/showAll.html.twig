@@ -19,8 +19,11 @@
             </div>
             <div class="col">
                 Date de départ : {{ booking.checkOut.format('d/m/yy') }}
-            </div>
 
+            </div>
+            <div class="col">
+                <a href="{{ path('user_cancel_booking', {'idBooking': booking.id}) }}" class="btn btn-danger">Annuler</a>
+            </div>
         </div>
         {% endfor %}
     </div>
