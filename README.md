@@ -1,7 +1,9 @@
 [![codecov](https://codecov.io/gh/BASAKSemih/ecf-studi/branch/develop/graph/badge.svg?token=CZO8CCBHJ4)](https://codecov.io/gh/BASAKSemih/ecf-studi)
 # ECF BASAK Semih
 
-http://hypnoshotel.basaksemih.com/
+# Lien du site : http://hypnoshotel.basaksemih.com/
+
+# Lien pour le code coverage : http://codecoverage.hypnoshotel.basaksemih.com/
 
 ## Requirement 
 
