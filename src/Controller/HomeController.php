@@ -76,7 +76,7 @@ final class HomeController extends AbstractController
      * @codeCoverageIgnore
      */
     #[Route('/verifier-une-suites', name: 'visitor_booking_check', methods: ['GET'])]
-    public function checkBookingAvailable(BookingRepository $bookingRepository, Request $request, SerializerInterface $serializer)
+    public function checkBookingAvailable(BookingRepository $bookingRepository, Request $request, SerializerInterface $serializer): JsonResponse
     {
         $checkIn = new DateTime($request->query->get('checkIn'));
         $checkOut = new DateTime($request->query->get('checkOut'));

@@ -5,6 +5,11 @@ includes:
     - vendor/phpstan/phpstan-symfony/rules.neon
 
 parameters:
+    excludePaths:
+            - src/Form/*
+            - src/Controller/HomeController/
+            - src/Controller/User/BookingController/
+            - src/Entity/Booking
     symfony:
         container_xml_path: var/cache/dev/App_KernelDevDebugContainer.xml
         console_application_loader: build/console.php
