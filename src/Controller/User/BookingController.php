@@ -13,8 +13,10 @@ use App\Form\BookingType;
 use App\Repository\BookingRepository;
 use App\Repository\HotelRepository;
 use App\Repository\RoomRepository;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -90,6 +92,7 @@ final class BookingController extends AbstractController
     #[Route('/espace-utilisateur/reserver-une-suites', name: 'user_booking_js')]
     public function createBookingDynamic(Request $request): Response
     {
+        /** @var User $user */
         $user = $this->getUser();
         $booking = new Booking();
         $form = $this->createForm(BookingJSType::class, $booking)->handleRequest($request);
@@ -108,6 +111,27 @@ final class BookingController extends AbstractController
         return $this->render('home/booking.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
+    #[Route('/espace-utilisateur/annuler-une-reservation/{idBooking}', name: 'user_cancel_booking')]
+    public function cancelBooking(int $idBooking): RedirectResponse
+    {
+        $booking = $this->bookingRepository->findOneByid($idBooking);
+
+        $date = new DateTime();
+        $checkDate = $booking->getCheckIn()->modify('- 3 days');
+        if ($checkDate <= $date) {
+            $this->addFlash('danger', 'Vous ne pouvez plus annuler cette réservation');
+
+            return $this->redirectToRoute('user_show_all_booking');
+        }
+        $this->entityManager->remove($booking);
+        $this->entityManager->flush();
+        $this->addFlash('success', 'Vous avez annulé la réservation');
+        return $this->redirectToRoute('user_show_all_booking');
     }
 
     #[Route('/espace-utilisateur/mes-reservation', name: 'user_show_all_booking')]
