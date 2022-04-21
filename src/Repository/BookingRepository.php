@@ -26,7 +26,7 @@ final class BookingRepository extends ServiceEntityRepository
         parent::__construct($registry, Booking::class);
     }
 
-    public function findAvailableRooms(DateTime $checkIn, DateTime $checkOut, int $idRoom): mixed
+    public function findAvailableRooms(DateTime $checkIn, DateTime $checkOut, string|int $idRoom): mixed
     {
         $qb = $this->getEntityManager()->createQueryBuilder()
             ->select('b')

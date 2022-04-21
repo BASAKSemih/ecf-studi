@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div id="showAvailable"></div>
+        <h1 class="h3 mb-3 font-weight-normal mt-5 pt-5">Voir les disponnibilité</h1>
+        {{ form_start(form) }}
+        <label for="">Hotel</label>
+        {{ form_row(form.hotel) }}
+        <label for="">Chambre</label>
+        {{ form_row(form.room) }}
+        <label for="">Date arrivée</label>
+        {{ form_row(form.checkIn) }}
+        <label for="">Date de sortie</label>
+        {{ form_row(form.checkOut) }}
+        <h5 class="modal-title" id="bookingModalLabel">Disponnible</h5>
+
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+        <button href="#" id="available" class="btn btn-success">Voir la disponnibilité</button>
+
+        {{ form_row(form.submit, { 'id' : 'btnBooking', 'label' :"Réserver"}) }}
+        {{ form_end(form) }}
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        window.onload = () => {
+            // On va chercher la région
+            let region = document.querySelector("#booking_js_hotel");
+            region.addEventListener("change", function(){
+                let form = this.closest("form");
+                let data = this.name + "=" + this.value;
+
+                fetch(form.action, {
+                    method: form.getAttribute("method"),
+                    body: data,
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded; charset:UTF-8"
+                    }
+                })
+                    .then(response => response.text())
+                    .then(html => {
+                        let content = document.createElement("html");
+                        content.innerHTML = html;
+                        let nouveauSelect = content.querySelector("#booking_js_room");
+                        document.querySelector("#booking_js_room").replaceWith(nouveauSelect);
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
+            });
+
+            let btnCheckAvailable = document.getElementById('available');
+            let btnBooking = document.getElementById('btnBooking').hidden = true;
+            let inputHotel = document.getElementById('booking_getHotelId');
+
+            btnCheckAvailable.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                let roomName = document.querySelector('[name="booking_js[room]"').value;
+                let hotelName = document.querySelector('[name="booking_js[hotel]"');
+                let room = document.querySelector('[name="booking_js[room]').value;
+                let inputCheckin = document.querySelector('[name="booking_js[checkIn]');
+                let inputCheckout = document.querySelector('[name="booking_js[checkOut]');
+                let dateCheckin = inputCheckin.value;
+                let dateCheckout = inputCheckout.value;
+
+                let url = '/verifier-une-suites';
+                url = url + '?idRoom=' + room + '&checkIn=' + dateCheckin + '&checkOut=' + dateCheckout;
+
+                if(inputCheckin.value == '' || inputCheckout.value == '') {
+                    alert('Please fill in the checkin and checkout date');  //check if the checkin and checkout date is empty
+                } else {
+                    // fetch room and check available
+                    fetch(url).then((response) =>
+                        response.json().then((data) => {
+                            if (data == '400') {
+                                document.querySelector("#showAvailable").innerHTML = '<div class="alert alert-warning" role="alert">Oh no ! Not available ! </div>';
+                                let btnBooking = document.getElementById('btnBooking').hidden = true;
+
+                            }
+                            if (data == '200') {
+                                let btnBooking = document.getElementById('btnBooking').hidden = false;
+                                let btnCheckAvailable = document.getElementById('available').hidden = true;
+                                document.querySelector("#showAvailable").innerHTML = '<div class="alert alert-success text-center" role="alert">Je suis disponnible ! ' + '</div>';
+                            }
+                        }).catch((error) => {
+                            console.log(error);
+                        })
+                    );
+                } //end of else
+            });
+        }
+    </script>
+{% endblock %}
