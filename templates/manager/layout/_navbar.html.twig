@@ -3,8 +3,17 @@
         <a class="navbar-brand" href="#">Espace Gérant</a>
         <div class="collapse navbar-collapse" id="navbarColor03">
             <ul class="navbar-nav me-auto">
-                <li class="nav-item">
-                </li>
+                    {% if app.user %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('manager_room_create', {'idHotel': app.user.hotel.id }) }}">Ajouter une suite</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('security_manager_homePage') }}">Mon hotel</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('security_manager_logout') }}">Déconnexion</a>
+                        </li>
+                    {% endif %}
             </ul>
         </div>
     </div>

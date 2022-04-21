@@ -65,6 +65,8 @@ security:
     access_control:
         - { path: ^/espace-administrateur/connexion, roles: PUBLIC_ACCESS }
         - { path: ^/espace-administrateur, roles: ROLE_ADMINISTRATOR }
+        - { path: ^/espace-manager/connexion, roles: PUBLIC_ACCESS }
+        - { path: ^/espace-manager, roles: ROLE_MANAGER }
         # - { path: ^/profile, roles: ROLE_USER }
 
 when@test:

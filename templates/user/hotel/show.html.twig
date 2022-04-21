@@ -18,7 +18,7 @@
                     <div class="card-body">
                         <h4 class="card-title">{{ r.name }} ( {{ (r.price / 100) }} ) €</h4>
                         <span class="badge badge-info text-black">{{ r.hotel.name }}</span>
-                        <p class="card-text">'faire la description'</p>
+                        <p class="card-text">{{ r.description }}</p>
                         <a href="{{ path('user_booking', {'idHotel': r.hotel.id, 'idRoom': r.id}) }}" class="btn btn-success btn-sm">Réserver </a>
                         <a href="https://www.booking.com/" type="button" class="btn btn-sm btn-info" target="_blank">Voir depuis Booking</a>
                     </div>

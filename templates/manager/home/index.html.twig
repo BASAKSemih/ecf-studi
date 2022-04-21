@@ -2,5 +2,29 @@
 
 
 {% block body %}
-
+    <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <h1 class="fw-light">{{ hotel.name }}</h1>
+                <p class="lead text-muted">{{ hotel.description }}</p>
+                <h1>Nos Chambre</h1>
+            </div>
+        </div>
+    </section>
+    <div class="container row">
+        {% for r in rooms %}
+            <div class="col-3">
+                <div class="card mt-2">
+                    <img src="/uploads/{{ r.mainPicture }}">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ r.name }} ( {{ (r.price / 100) }} ) €</h4>
+                        <span class="badge badge-info text-black">{{ r.hotel.name }}</span>
+                        <p class="card-text">{{ r.description }}</p>
+                        <a href="{{ path('manager_room_edit', {'idHotel': hotel.id, 'idRoom': r.id }) }}" type="button" class="btn btn-sm btn-info">Modifier la suite</a>
+                        <a href="{{ path('manager_room_delete', {'idHotel': hotel.id, 'idRoom': r.id }) }}" type="button" class="btn btn-sm btn-danger">Supprimer la suite</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}
