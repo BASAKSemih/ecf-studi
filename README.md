@@ -2,7 +2,8 @@
 # ECF BASAK Semih
 
 # Lien du site : http://hypnoshotel.basaksemih.com/
-# Lien pour le code coverage : codecoverage.hypnoshotel.basaksemih.com
+
+# Lien pour le code coverage : http://codecoverage.hypnoshotel.basaksemih.com/
 
 ## Requirement 
 
