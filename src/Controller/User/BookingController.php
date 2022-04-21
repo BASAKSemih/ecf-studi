@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace App\Controller\User;
 
 use App\Entity\Booking;
+use App\Entity\Hotel;
 use App\Entity\Room;
 use App\Entity\User;
+use App\Form\BookingJSType;
 use App\Form\BookingType;
 use App\Repository\BookingRepository;
 use App\Repository\HotelRepository;
@@ -78,6 +80,32 @@ final class BookingController extends AbstractController
         return $this->render('user/booking/create.html.twig', [
             'room' => $room,
             'hotel' => $hotel,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
+    #[Route('/espace-utilisateur/reserver-une-suites', name: 'user_booking_js')]
+    public function createBookingDynamic(Request $request): Response
+    {
+        $user = $this->getUser();
+        $booking = new Booking();
+        $form = $this->createForm(BookingJSType::class, $booking)->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var Hotel $hotel */
+            $hotel = $booking->getRoom()->getHotel();
+            $booking->setUser($user);
+            $booking->setHotel($hotel);
+            $this->entityManager->persist($booking);
+            $this->entityManager->flush();
+            $this->addFlash('success', 'Vous avez bien réserver');
+
+            return $this->redirectToRoute('user_show_all_booking');
+        }
+
+        return $this->render('home/booking.html.twig', [
             'form' => $form->createView(),
         ]);
     }

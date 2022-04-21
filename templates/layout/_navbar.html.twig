@@ -12,6 +12,9 @@
                         <a class="nav-link" href="{{ path('user_show_all_booking') }}">Mes réservation ({{ app.user.email }})</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ path('user_booking_js') }}">Réserver rapidement</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ path('user_contact') }}">Contact</a>
                     </li>
                 {% else %}
@@ -20,6 +23,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('security_user_login') }}">Connexion</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('visitor_booking') }}">Réserver rapidement</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('visitor_contact') }}">Contact</a>

@@ -18,24 +18,24 @@ class Booking
     private ?int $id = null;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'bookings')]
-    #[ORM\JoinColumn(nullable: false)]
-    private User $user;
+    #[ORM\JoinColumn(nullable: true)]
+    private ?User $user;
 
     #[Assert\GreaterThan('today', message: "La data arrivé doit être supérieur à celle d'aujourd'hui")]
-    #[ORM\Column(type: 'date')]
-    private DateTime $checkIn;
+    #[ORM\Column(type: 'date', nullable: true)]
+    private ?DateTime $checkIn = null;
 
     #[Assert\GreaterThan(propertyPath: 'checkIn', message: 'La date de checkOut dois être après la data checkIn')]
-    #[ORM\Column(type: 'date')]
-    private DateTime $checkOut;
+    #[ORM\Column(type: 'date', nullable: true)]
+    private ?DateTime $checkOut = null;
 
     #[ORM\ManyToOne(targetEntity: Room::class, inversedBy: 'bookings')]
     #[ORM\JoinColumn(nullable: false)]
-    private Room $room;
+    private ?Room $room;
 
     #[ORM\ManyToOne(targetEntity: Hotel::class, inversedBy: 'bookings')]
     #[ORM\JoinColumn(nullable: false)]
-    private Hotel $hotel;
+    private ?Hotel $hotel;
 
     public function getId(): ?int
     {
@@ -57,24 +57,24 @@ class Booking
         return $this;
     }
 
-    public function getCheckIn(): DateTime
+    public function getCheckIn(): ?DateTime
     {
         return $this->checkIn;
     }
 
-    public function setCheckIn(DateTime $checkIn): self
+    public function setCheckIn(?DateTime $checkIn): self
     {
         $this->checkIn = $checkIn;
 
         return $this;
     }
 
-    public function getCheckOut(): DateTime
+    public function getCheckOut(): ?DateTime
     {
         return $this->checkOut;
     }
 
-    public function setCheckOut(DateTime $checkOut): self
+    public function setCheckOut(?DateTime $checkOut): self
     {
         $this->checkOut = $checkOut;
 
