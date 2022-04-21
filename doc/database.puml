@@ -1,0 +1,80 @@
+@startuml
+
+entity User {
+    id int
+    email string
+    roles json
+    password string
+    firstName string
+    lastName string
+    createdAt datetime_immutable
+    isVerified bool
+}
+
+entity Admin {
+    id int
+    email string
+    roles json
+    password string
+    firstName string
+    lastName string
+    createdAt datetime_immutable
+}
+
+entity Manager {
+    id int
+    email string
+    roles json
+    password string
+    firstName string
+    lastName string
+    createdAt datetime_immutable
+}
+
+entity Hotel {
+    id int
+    name string
+    city string
+    description string
+    address string
+    manager_id int
+    createdAt datetime_immutable
+}
+
+entity Room {
+    id int
+    name string
+    description string
+    price int
+    mainPicture string
+    slug string
+    hotel_id int
+    createdAt datetime_immutable
+}
+
+entity Booking {
+    id int
+    user_id int
+    hotel_id int
+    room_id int
+    check_in date
+    check_out date
+}
+
+entity Contact {
+    id int
+    user_id int
+    email string
+    createdAt datetime_immutable
+    topic   string
+    context string
+}
+
+Contact "Many" o-- "One" User: To
+Booking "Many" o-- "One" User: To
+Booking "Many" o-- "One" Room: To
+Booking "Many" o-- "One" Hotel: To
+Hotel "One" o-- "One" Manager: To
+Hotel "One" o-- "Many" Room : To
+
+@enduml
