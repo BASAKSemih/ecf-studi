@@ -28,7 +28,7 @@
     <script>
         window.onload = () => {
             let hotelForm = document.querySelector("#booking_js_hotel");
-            region.addEventListener("change", function(){
+            hotelForm.addEventListener("change", function(){
                 let form = this.closest("form");
                 let data = this.name + "=" + this.value;
 
